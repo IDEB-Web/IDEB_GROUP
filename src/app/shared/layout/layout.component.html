@@ -1,0 +1,87 @@
+<div class="layout-container">
+  <div class="main-content">
+    <!-- HEADER -->
+    <header class="header" *ngIf="showMainHeader()">
+      <button class="menu-btn" (click)="menuOpen = !menuOpen">&#9776;</button>
+      <div class="logo-container">
+        <img src="assets/LOGO_IDEB.png" alt="LOGO" class="company-logo" (click)="navigateTo('home')" style="cursor:pointer;" />
+      </div>
+      <span class="system-title">
+        {{ getHeaderTitle() }}
+      </span>
+      <div class="user-menu">
+        <button class="login-btn" (click)="openLoginModal()">
+          <img src="assets/profile.svg" alt="Usuario" class="profile-icon" />
+        </button>
+      </div>
+      <ul *ngIf="menuOpen" class="dropdown-menu" (click)="$event.stopPropagation()">
+        <li><a routerLink="/instituto" (click)="closeMenu()">Instituto I-DEB</a></li>
+        <li><a routerLink="/automated" (click)="closeMenu()">I-DEB Automated Machines</a></li>
+        <li><a routerLink="/seati" (click)="closeMenu()">SEATI-DEB Servicios Especializados</a></li>
+      </ul>
+    </header>
+
+    <!-- CONTENIDO -->
+    <section class="content">
+      <!-- Vista inicial (home) -->
+      <ng-container *ngIf="isHomeView; else moduleContent">
+        <div class="main-buttons-container">
+          <div class="top-buttons">
+            <button class="main-btn left-btn" (click)="navigateTo('instituto')">
+              <span class="main-nav-btn-text">INSTITUTO DE <br> CAPACITACION <br> INDUSTRIAL I-DEB</span>
+            </button>
+            <button class="main-btn right-btn" (click)="navigateTo('automated')">
+              <span class="main-nav-btn-text">I-DEB <br> AUTOMATED<br>MACHINES SERVICES</span>
+            </button>
+          </div>
+          <button class="main-btn center-btn" (click)="navigateTo('seati')">
+            <span class="main-nav-btn-text">SEATI-DEB<br>SERVICIOS ESPECIALIZADOS<br>DE ASISTENCIA TECNICA</span>
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- Páginas hijas -->
+      <ng-template #moduleContent>
+        <router-outlet></router-outlet>
+      </ng-template>
+    </section>
+
+    <!-- Modal de login -->
+    <div class="modal-backdrop" *ngIf="loginModalOpen" (click)="closeLoginModal()"></div>
+    <div class="login-modal" *ngIf="loginModalOpen" (click)="$event.stopPropagation()">
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+        <!-- LOGO -->
+        <img src="assets/LOGO_IDEB.png" alt="LOGO" class="login-logo" />
+
+        <!-- TÍTULO -->
+        <h3>Iniciar Sesión</h3>
+        <p *ngIf="loginError" class="error-message">{{ loginError }}</p>
+
+        <!-- CAMPOS -->
+        <label for="email">Correo Electrónico</label>
+        <input type="email" id="email" placeholder="Correo Electrónico" formControlName="email" required />
+
+        <label for="password">Contraseña</label>
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Contraseña" formControlName="password" required />
+          <span class="toggle-password">👁</span>
+        </div>
+
+        <!-- BOTÓN -->
+        <button type="submit" class="btn-login" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+
+        <!-- ENLACES -->
+        <div class="login-links">
+          <p>¿No tienes una cuenta? <a routerLink="/register" (click)="closeLoginModal()">Regístrate aquí</a></p>
+          <a href="#">Olvidé mi contraseña</a>
+        </div>
+
+        <!-- VERSIÓN -->
+        <p class="version">Versión 3.7.4</p>
+      </form>
+    </div>
+
+    <!-- FOOTER -->
+    <app-footer></app-footer>
+  </div>
+</div>

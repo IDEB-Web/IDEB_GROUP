@@ -1,0 +1,492 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  width: 220px;
+  background: #000000;
+  color: #fff;
+  transition: transform 0.3s, width 0.3s;
+  padding-top: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.10);
+}
+.sidebar.collapsed {
+  width: 60px;
+}
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar nav ul li {
+  margin: 1rem 0;
+}
+.sidebar nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.sidebar nav ul li a:hover {
+  background: #455a64;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  max-width: 100vw;
+}
+.header {
+  background: #000000;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  gap: 1.5rem;
+  height: 60px;
+}
+.menu-btn {
+  position: static;
+  margin-right: 1.2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.menu-btn:focus, .menu-btn:hover {
+  background: #222;
+  color: #fff;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 2rem;
+  min-width: 40px;
+  height: 100%;
+}
+.company-logo {
+  height: 100%;
+  max-height: 70px;
+  width: auto;
+  display: block;
+}
+.system-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex: 1 1 auto;
+  text-align: center;
+  min-width: 0;
+  margin: 0 1rem;
+}
+/* 📱 Ajustes para tablets */
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap; /* permite que los elementos bajen ordenados */
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    height: auto;
+  }
+
+  .logo-container {
+    margin: 0;
+    height: 50px; /* reduce tamaño */
+  }
+
+  .company-logo {
+    max-height: 50px;
+  }
+
+  .system-title {
+    flex: 1 1 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+
+  .user-menu {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .profile-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* 📱 Extra pequeño (celulares) */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.7rem;
+    gap: 0.4rem;
+  }
+
+  .system-title {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .logo-container {
+    height: 40px;
+  }
+
+  .company-logo {
+    max-height: 40px;
+  }
+
+  .user-menu {
+    margin: 0;
+  }
+}
+
+.user-menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-right: 3.5rem;
+}
+.login-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  object-fit: cover;
+}
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: #f5f5f5;
+  min-width: 0;
+}
+.footer {
+  background: #263238;
+  color: #fff;
+  text-align: center;
+  padding: 0.7rem;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  z-index: 2000;
+}
+/* --- LOGIN MODAL --- */
+.login-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  color: #222;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 2100;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-logo {
+  max-width: 180px;
+  margin-bottom: 1rem;
+}
+
+.login-form h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.login-form label {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0.2rem;
+  color: #444;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.login-form input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 4px rgba(25, 118, 210, 0.3);
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  padding-right: 2.5rem;
+}
+
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.btn-login {
+  width: 100%;
+  background: #111;
+  color: #fff;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 0.5rem 0 1rem;
+}
+
+.btn-login:hover {
+  background: #333;
+}
+
+.login-links {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.login-links a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+.version {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  left: 2rem;
+  background: #090909;
+  color: #fff;
+  list-style: none;
+  padding: 1.2rem 0;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+  min-width: 260px;
+  z-index: 1200;
+}
+.dropdown-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 1rem 1.6rem;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.dropdown-menu li a:hover {
+  background: #333;
+  color: #fff;
+}
+.main-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 2.5rem;
+}
+.top-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100%;
+}
+.main-btn {
+  background: #111;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  transition: background 0.2s, transform 0.2s;
+  min-width: 440px;
+  max-width: 900px;
+  margin: 0 1rem;
+}
+.main-btn:hover {
+  background: #1976d2;
+  color: #fff;
+  transform: scale(1.04);
+}
+.left-btn {
+  align-self: flex-start;
+}
+.right-btn {
+  align-self: flex-end;
+}
+.center-btn {
+  align-self: center;
+  margin-top: 2.5rem;
+}
+.main-nav-buttons {
+  display: flex;
+  flex-wrap: wrap;    
+  justify-content: center;
+  gap: 1rem;
+}
+
+.main-nav-button {
+  flex: 1 1 260px; 
+  background: #111;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  width: 260px;
+  height: 65px;
+  padding: 0 2rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-nav-button:hover {
+  background: #000;
+}
+.main-nav-btn-text {
+  display: block;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+  .logo-container {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  .system-title {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    text-align: left;
+  }
+  .user-menu {
+  margin-left: auto;
+  margin-right: 1rem; 
+  display: flex;
+  align-items: center;
+}
+
+}
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.7rem;
+  }
+  .logo-container {
+    margin: 0 auto 0.5rem auto;
+  }
+  .system-title {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+    text-align: center;
+  }
+  .user-menu {
+    margin: 0 auto;
+    margin-top: 0.3rem;
+  }
+  .dropdown-menu {
+    left: 0.5rem;
+    min-width: 180px;
+    font-size: 1rem;
+  }
+}

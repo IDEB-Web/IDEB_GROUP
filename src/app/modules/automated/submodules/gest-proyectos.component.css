@@ -1,0 +1,31 @@
+.proyectos-btn-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.proyectos-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/*
+  ==========================================================================
+  Colores de texto personalizados para botones
+  ==========================================================================
+  Usa estas clases en tus botones para cambiar el color del texto.
+  Ejemplo: <button class="btn-main text-custom-color-1">Texto</button>
+*/
+
+/* Color de texto personalizado 1 (Ejemplo: azul) */
+.text-custom-color-1 {
+  color: #f41f1f; /* Cambia este color a tu gusto */
+}
+
+/* Color de texto personalizado 2 (Ejemplo: verde) */
+.text-custom-color-2 {
+  color: #c6d12f; /* Cambia este color a tu gusto */
+}

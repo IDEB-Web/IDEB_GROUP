@@ -1,0 +1,87 @@
+.footer {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 1.2rem 0 0.7rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-left {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-left: 7%;
+}
+
+.footer-left h3 {
+  color: #1976d2; 
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  text-align: left;
+  width: 100%;
+  
+}
+
+.footer-left p {
+  margin: 0.3rem 0;
+  font-size: 0.98rem;
+}
+
+.footer-left .material-icons {
+  font-size: 20px;
+  color: #fff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+  justify-content: flex-start; /* ya está, pero lo hacemos explícito */
+  margin-left: 10px; 
+}
+
+.social-icons a {
+  font-size: 28px;
+  color: #fff;
+  transition: color 0.3s;
+  display: inline-block;
+}
+
+.social-icons a:hover {
+  color: #1976d2;
+}
+
+.footer-version {
+  text-align: right;
+  margin-top: .02rem;
+  font-size: 0.85rem;
+  margin-right: 225px;
+  font-size: 1rem;
+  
+}
+
+.footer-right {
+  color: #1976d2;
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: right;
+  margin-left: 20%;
+}

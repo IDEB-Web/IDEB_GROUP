@@ -1,0 +1,22 @@
+<!-- Este contenedor solo se mostrará en la ruta /automated -->
+<div class="automated-container" *ngIf="router.url === '/automated'">
+    <h1>I-DEB AUTOMATED MACHINES SERVICES</h1>
+    <div class="automated-btn-grid">
+        <div class="automated-btn-row">
+            <button class="btn-main" routerLink="gest-proyectos">GESTION DE PROYECTOS</button>
+            <button class="btn-main" routerLink="gest-pedidos">GESTION DE PEDIDOS</button>
+            <button class="btn-main" routerLink="ingenieria">INGENIERIA</button>
+            <button class="btn-main" routerLink="finanzas">FINANZAS</button>
+        </div>
+        <div class="automated-btn-row">
+            <button class="btn-main" routerLink="compras">COMPRAS</button>
+            <button class="btn-main" routerLink="capital-humano">CAPITAL HUMANO</button>
+            <button class="btn-main" routerLink="recursos-materiales">RECURSOS MATERIALES</button>
+            <button class="btn-main" routerLink="ventas">VENTAS</button>
+            <button class="btn-main" routerLink="post-ventas">POST-VENTAS</button>
+        </div>
+    </div>
+</div>
+
+<!-- El router-outlet siempre está presente para cargar los submódulos -->
+<router-outlet></router-outlet>

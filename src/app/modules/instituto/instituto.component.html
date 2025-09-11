@@ -1,0 +1,40 @@
+<!-- Sección de botones: solo se muestra en /instituto -->
+<div class="instituto-container" *ngIf="router.url === '/instituto'">
+  <h1>INSTITUTO DE CAPACITACION <br> INDUSTRIAL I-DEB</h1> 
+
+  <div class="instituto-btn-grid">
+    <button class="instituto-btn" routerLink="/instituto/gestion-cursos">
+      GESTION DE CURSOS
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/gestion-participantes">
+      GESTION DE PARTICIPANTES
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/generacion-docs">
+      GENERACIÓN DE DOCUMENTACIÓN
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/gestion-instructores">
+      GESTIÓN DE INSTRUCTORES
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/finanzas">
+      FINANZAS
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/compras">
+      COMPRAS
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/recursos-materiales">
+      RECURSOS <br> MATERIALES
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/capital-humano">
+      CAPITAL HUMANO
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/portal-web">
+      PORTAL WEB
+    </button>
+    <button class="instituto-btn" routerLink="/instituto/ventas">
+      VENTAS
+    </button>
+  </div>
+</div>
+
+<!-- Aquí se cargan los submódulos -->
+<router-outlet></router-outlet>
