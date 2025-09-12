@@ -1,0 +1,21 @@
+.pedidos-btn-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.pedidos-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.text-custom-color-1 {
+  color: #f41f1f; /* Rojo */
+}
+
+.text-custom-color-2 {
+  color: #c6d12f; /* Verde/amarillo */
+}

@@ -1,0 +1,37 @@
+<div class="submodule-container">
+  <h2>Aprobación de Usuarios</h2>
+
+  <div *ngIf="message" [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
+    {{ message }}
+  </div>
+
+  <div *ngIf="pendingUsers.length === 0; else usersTable" class="no-users-message">
+    No hay usuarios pendientes de aprobación.
+  </div>
+
+  <ng-template #usersTable>
+    <table class="approval-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Fecha de Registro</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of pendingUsers">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.created_at | date:'short' }}</td>
+          <td class="actions">
+            <button (click)="approveUser(user.id)" class="btn-approve">Aprobar</button>
+            <button (click)="rejectUser(user.id)" class="btn-reject">Rechazar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

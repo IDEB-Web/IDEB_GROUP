@@ -9,11 +9,22 @@
       <span class="system-title">
         {{ getHeaderTitle() }}
       </span>
-      <div class="user-menu">
-        <button class="login-btn" (click)="openLoginModal()">
-          <img src="assets/profile.svg" alt="Usuario" class="profile-icon" />
-        </button>
-      </div>
+     <div class="user-menu" *ngIf="!currentUser">
+  <button class="login-btn" (click)="openLoginModal()">
+    <img src="assets/profile.svg" alt="Usuario" class="profile-icon" />
+  </button>
+</div>
+
+<div class="user-menu" *ngIf="currentUser">
+  <img 
+    [src]="currentUser.photoUrl || 'assets/profile.svg'" 
+    alt="Foto usuario" 
+    class="profile-icon"
+  />
+  <span class="user-name">{{ currentUser.name }}</span>
+  <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+</div>
+
       <ul *ngIf="menuOpen" class="dropdown-menu" (click)="$event.stopPropagation()">
         <li><a routerLink="/instituto" (click)="closeMenu()">Instituto I-DEB</a></li>
         <li><a routerLink="/automated" (click)="closeMenu()">I-DEB Automated Machines</a></li>

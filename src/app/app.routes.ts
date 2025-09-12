@@ -1,45 +1,89 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './shared/layout/layout.component';
+import { HomeComponent } from './modules/home/home.component';
+import { InstitutoComponent } from './modules/instituto/instituto.component';
+import { AutomatedComponent } from './modules/automated/automated.component';
+import { SeatiComponent } from './modules/seati/seati.component';
+import { RegisterComponent } from './modules/register/register.component';
+import { UserApprovalComponent } from './admin/user-approval.component';
+import { adminGuard } from './guards/admin.guard';
+
+//  Submódulos de Instituto
+import { GestionCursosComponent } from './modules/instituto/submodules/gestion-cursos/gestion-cursos.component';
+import { GestionParticipantesComponent } from './modules/instituto/submodules/gestion-participantes/gestion-participantes.component';
+import { GeneracionDocsComponent } from './modules/instituto/submodules/generacion-docs/generacion-docs.component';
+import { GestionInstructoresComponent } from './modules/instituto/submodules/gestion-instructores/gestion-instructores.component';
+import { FinanzasComponent as InstitutoFinanzasComponent } from './modules/instituto/submodules/finanzas/finanzas.component';
+import { ComprasComponent as InstitutoComprasComponent } from './modules/instituto/submodules/compras/compras.component';
+import { RecursosMaterialesComponent as InstitutoRecursosMaterialesComponent } from './modules/instituto/submodules/recursos-materiales/recursos-materiales.component';
+import { CapitalHumanoComponent as InstitutoCapitalHumanoComponent } from './modules/instituto/submodules/capital-humano/capital-humano.component';
+import { PortalWebComponent } from './modules/instituto/submodules/portal-web/portal-web.component';
+import { VentasComponent as InstitutoVentasComponent } from './modules/instituto/submodules/ventas/ventas.component';
+
+
+// Submódulos de Automated
+import { GestProyectosComponent } from './modules/automated/submodules/gest-proyectos/gest-proyectos.component';
+import { IngenieriaComponent } from './modules/automated/submodules/ingenieria/ingenieria.component';
+import { GestPedidosComponent } from './modules/automated/submodules/gest-pedidos/gest-pedidos.component';
+import { FinanzasComponent as AutomatedFinanzasComponent } from './modules/automated/submodules/finanzas/finanzas.component';
+import { ComprasComponent as AutomatedComprasComponent } from './modules/automated/submodules/compras/compras.component';
+import { CapitalHumanoComponent as AutomatedCapitalHumanoComponent } from './modules/automated/submodules/capital-humano/capital-humano.component';
+import { RecursosMatComponent } from './modules/automated/submodules/recursos-materiales/recursos-mat.component';
+import { VentasComponent } from './modules/automated/submodules/ventas/ventas.component';
+import { PostVentasComponent } from './modules/automated/submodules/post-ventas/post-ventas.component';
+//SUBMODULOS Nivel2-CAPITAL HUMANO 
+import { ColaboradoresComponent } from './modules/automated/submodules/capital-humano/submodules/colaboradores.component';
+import { PractEstadiasComponent } from './modules/automated/submodules/capital-humano/submodules/pract-estadias.component';
+import { GestTiemposComponent } from './modules/automated/submodules/capital-humano/submodules/gest-tiempos.component';
+
+
 
 
 export const routes: Routes = [
-	{
-		path: '',
-		component: LayoutComponent,
-		children: [
-			{ path: 'register', loadComponent: () => import('./modules/register/register.component').then(m => m.RegisterComponent) },
-			{ path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
-			{ path: 'instituto',
-			  loadComponent: () => import('./modules/instituto/instituto.component').then(m => m.InstitutoComponent),
-			  children: [
-			    { path: 'gestion-cursos', loadComponent: () => import('./modules/instituto/submodules/gestion-cursos.component').then(m => m.GestionCursosComponent) },
-			    { path: 'gestion-participantes', loadComponent: () => import('./modules/instituto/submodules/gestion-participantes.component').then(m => m.GestionParticipantesComponent) },
-			    { path: 'generacion-docs', loadComponent: () => import('./modules/instituto/submodules/generacion-docs.component').then(m => m.GeneracionDocsComponent) },
-			    { path: 'gestion-instructores', loadComponent: () => import('./modules/instituto/submodules/gestion-instructores.component').then(m => m.GestionInstructoresComponent) },
-			    { path: 'finanzas', loadComponent: () => import('./modules/instituto/submodules/finanzas.component').then(m => m.FinanzasComponent) },
-			    { path: 'compras', loadComponent: () => import('./modules/instituto/submodules/compras.component').then(m => m.ComprasComponent) },
-			    { path: 'recursos-materiales', loadComponent: () => import('./modules/instituto/submodules/recursos-materiales.component').then(m => m.RecursosMaterialesComponent) },
-			    { path: 'capital-humano', loadComponent: () => import('./modules/instituto/submodules/capital-humano.component').then(m => m.CapitalHumanoComponent) },
-			    { path: 'portal-web', loadComponent: () => import('./modules/instituto/submodules/portal-web.component').then(m => m.PortalWebComponent) },
-			    { path: 'ventas', loadComponent: () => import('./modules/instituto/submodules/ventas.component').then(m => m.VentasComponent) }
-			  ]
-			},
-			{ path: 'automated',
-			  loadComponent: () => import('./modules/automated/automated.component').then(m => m.AutomatedComponent),
-			  children: [
-			    { path: 'gest-proyectos', loadComponent: () => import('./modules/automated/submodules/gest-proyectos.component').then(m => m.GestProyectosComponent) },
-			    // { path: 'gest-pedidos', loadComponent: () => import('./modules/automated/submodules/gest-pedidos.component').then(m => m.GestPedidosComponent) },
-			    // { path: 'ingenieria', loadComponent: () => import('./modules/automated/submodules/ingenieria.component').then(m => m.IngenieriaComponent) },
-			    // { path: 'finanzas', loadComponent: () => import('./modules/automated/submodules/finanzas.component').then(m => m.FinanzasComponent) },
-			    // { path: 'compras', loadComponent: () => import('./modules/automated/submodules/compras.component').then(m => m.ComprasComponent) },
-			    // { path: 'capital-humano', loadComponent: () => import('./modules/automated/submodules/capital-humano.component').then(m => m.CapitalHumanoComponent) },
-			    // { path: 'recursos-materiales', loadComponent: () => import('./modules/automated/submodules/recursos-materiales.component').then(m => m.RecursosMaterialesComponent) },
-			    // { path: 'ventas', loadComponent: () => import('./modules/automated/submodules/ventas.component').then(m => m.VentasComponent) },
-			    // { path: 'post-ventas', loadComponent: () => import('./modules/automated/submodules/post-ventas.component').then(m => m.PostVentasComponent) }
-			  ]
-			},
-			{ path: 'seati', loadComponent: () => import('./modules/seati/seati.component').then(m => m.SeatiComponent) },
-			{ path: '', redirectTo: 'home', pathMatch: 'full' },
-		]
-	}
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+
+  {
+    path: 'instituto',
+    component: InstitutoComponent,
+    children: [
+      { path: 'gestion-cursos', component: GestionCursosComponent },
+      { path: 'gestion-participantes', component: GestionParticipantesComponent },
+      { path: 'generacion-docs', component: GeneracionDocsComponent },
+      { path: 'gestion-instructores', component: GestionInstructoresComponent },
+      { path: 'finanzas', component: InstitutoFinanzasComponent },
+      { path: 'compras', component: InstitutoComprasComponent },
+      { path: 'recursos-materiales', component: InstitutoRecursosMaterialesComponent },
+      { path: 'capital-humano', component: InstitutoCapitalHumanoComponent },
+      { path: 'portal-web', component: PortalWebComponent },
+      { path: 'ventas', component: InstitutoVentasComponent },
+    ]
+  },
+{
+  path: 'automated',
+  component: AutomatedComponent,
+  children: [
+    { path: 'gest-proyectos', component: GestProyectosComponent },
+    { path: 'gest-pedidos', component: GestPedidosComponent },
+    { path: 'ingenieria', component: IngenieriaComponent },
+    { path: 'finanzas', component: AutomatedFinanzasComponent },
+    { path: 'compras', component: AutomatedComprasComponent },
+    { path: 'ventas', component: VentasComponent },
+    { path: 'post-ventas', component: PostVentasComponent },
+    { path: 'recursos-materiales', component: RecursosMatComponent },
+    { path: 'capital-humano', component: AutomatedCapitalHumanoComponent },
+    { path: 'capital-humano/colaboradores', component: ColaboradoresComponent },
+    { path: 'capital-humano/pract-estadias', component: PractEstadiasComponent },
+    { path: 'capital-humano/gest-tiempos', component: GestTiemposComponent }
+  ]
+}
+,
+
+  { path: 'seati', component: SeatiComponent },
+  { path: 'register', component: RegisterComponent },
+
+  {
+    path: 'admin/usuarios',
+    component: UserApprovalComponent,
+    canActivate: [adminGuard]
+  },
 ];

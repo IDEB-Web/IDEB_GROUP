@@ -4,7 +4,7 @@ import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FooterComponent } from '../footer/footer.component';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service'; // Asegúrate de que este servicio exista
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -21,10 +21,12 @@ export class LayoutComponent implements OnInit {
   loginForm: FormGroup;
   loginError: string | null = null;
 
+  currentUser: any = null; // 👈 Usuario logueado
+
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -33,6 +35,9 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Recuperar usuario si ya estaba en localStorage
+    this.currentUser = this.authService.getUser();
+
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -61,22 +66,25 @@ export class LayoutComponent implements OnInit {
     }
     this.loginError = null;
 
-    // Llama al servicio de autenticación para comunicarse con el backend de Laravel
     this.authService.login(this.loginForm.value).subscribe({
       next: (response: any) => {
         console.log('Login exitoso!', response);
-        // Guardar el token para mantener la sesión
-        localStorage.setItem('authToken', response.access_token);
-        // Opcional: guardar información del usuario
-        // localStorage.setItem('user', JSON.stringify(response.user));
+        this.currentUser = response.user; // 👈 Guardar usuario
         this.closeLoginModal();
-        this.router.navigate(['/home']); // O redirigir a un dashboard
+        this.router.navigate(['/home']);
       },
       error: (err: any) => {
         this.loginError = err.error.message || 'Error al iniciar sesión. Verifica tus credenciales.';
         console.error('Error de login:', err);
       },
     });
+  }
+
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    this.currentUser = null;
+    this.router.navigate(['/home']);
   }
 
   navigateTo(view: string) {
@@ -94,6 +102,7 @@ export class LayoutComponent implements OnInit {
         this.router.navigate(['/home']);
         break;
     }
+    this.closeMenu();
   }
 
   getHeaderTitle(): string {

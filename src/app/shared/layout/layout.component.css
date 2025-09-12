@@ -168,16 +168,31 @@
     max-height: 40px;
   }
 
-  .user-menu {
-    margin: 0;
-  }
-}
+.user-name {
+  margin-left: 0.8rem;
+  font-weight: 500;
+  color: #fff;
+}}
 
 .user-menu {
   margin-left: auto;
   display: flex;
   align-items: center;
   margin-right: 3.5rem;
+}
+.logout-btn {
+  margin-left: 1rem;
+  background: #7c7676;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #b71c1c;
 }
 .login-btn {
   background: none;
