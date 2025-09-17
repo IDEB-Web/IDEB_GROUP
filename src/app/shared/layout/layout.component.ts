@@ -22,8 +22,7 @@ export class LayoutComponent implements OnInit {
   loginError: string | null = null;
 
   currentUser: any = null; // Usuario logueado
-
-  settingsOpen = false; // Dropdown de configuraciones
+  settingsOpen = false;    // Dropdown de configuraciones
 
   constructor(
     public router: Router,
@@ -44,6 +43,12 @@ export class LayoutComponent implements OnInit {
       .subscribe((event: NavigationEnd) => {
         this.isHomeView = event.urlAfterRedirects === '/home' || event.urlAfterRedirects === '/';
       });
+  }
+
+  // Toggle menú hamburguesa
+  toggleMenu(event: Event) {
+    event.stopPropagation();
+    this.menuOpen = !this.menuOpen;
   }
 
   // Login modal
@@ -74,6 +79,14 @@ export class LayoutComponent implements OnInit {
       },
     });
   }
+// Nueva propiedad para dropdown de usuario
+userDropdownOpen = false;
+
+// Toggle del dropdown del usuario
+toggleUserDropdown(event: Event) {
+  event.stopPropagation();
+  this.userDropdownOpen = !this.userDropdownOpen;
+}
 
   // Login con Google
   loginWithGoogle() {
@@ -82,10 +95,16 @@ export class LayoutComponent implements OnInit {
 
   // Logout
   logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    this.currentUser = null;
-    this.router.navigate(['/home']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.currentUser = null;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Error en el logout del servidor, cerrando sesión localmente:', err);
+        this.authService.logout(); // Esto limpiará el localStorage de todas formas
+      }
+    });
   }
 
   // Navegación principal
@@ -99,7 +118,7 @@ export class LayoutComponent implements OnInit {
     this.closeMenu();
   }
 
-  // Header title
+  // Header title dinámico
   getHeaderTitle(): string {
     const url = this.router.url;
     const titleMap: { [key: string]: string } = {
@@ -113,19 +132,27 @@ export class LayoutComponent implements OnInit {
     return 'I-DEB GROUP ERP';
   }
 
-  // Mostrar header
+  // Mostrar header siempre
   showMainHeader(): boolean { return true; }
 
   // Menú principal
   closeMenu() { this.menuOpen = false; }
 
   // Dropdown de configuraciones
-  toggleSettingsMenu() { this.settingsOpen = !this.settingsOpen; }
+  toggleSettingsMenu(event: Event) {
+    event.stopPropagation();
+    this.settingsOpen = !this.settingsOpen;
+  }
 
   // Cerrar dropdowns al hacer click fuera
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     if (this.settingsOpen) this.settingsOpen = false;
     if (this.menuOpen) this.menuOpen = false;
+  }
+
+  // Verificar si el usuario es admin
+  isAdmin(): boolean {
+    return this.currentUser?.role === 'admin';
   }
 }

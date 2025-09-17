@@ -136,14 +136,18 @@
   }
 
   .user-menu {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto; /* Añade esto para mantenerlo a la derecha */
+    margin-right: 0.3rem;
   }
 
-  .profile-icon {
-    width: 32px;
-    height: 32px;
-  }
+ .profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
 }
 
 /* 📱 Extra pequeño (celulares) */
@@ -178,7 +182,9 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  margin-right: 3.5rem;
+  position: relative;
+  margin-right: 3rem;
+  gap: 0px;/* Ajustado para dar espacio al menú de configuración */
 }
 .logout-btn {
   margin-left: 1rem;
@@ -203,7 +209,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #fff;
+  background: #878585;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   object-fit: cover;
 }
@@ -459,29 +465,7 @@
   font-weight: bold;
   letter-spacing: 1px;
 }
-@media (max-width: 900px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-  .logo-container {
-    margin-left: 0;
-    margin-right: 0.5rem;
-  }
-  .system-title {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
-    text-align: left;
-  }
-  .user-menu {
-  margin-left: auto;
-  margin-right: 1rem; 
-  display: flex;
-  align-items: center;
-}
 
-}
 @media (max-width: 600px) {
   .header {
     flex-direction: column;
@@ -497,8 +481,9 @@
     text-align: center;
   }
   .user-menu {
-    margin: 0 auto;
-    margin-top: 0.3rem;
+    /* Quita el centrado que causa el desbordamiento */
+    margin-left: auto; /* Empuja el menú a la derecha */
+    margin-right: 1rem; /* Dale un poco de espacio del borde */
   }
   .dropdown-menu {
     left: 0.5rem;
@@ -509,7 +494,9 @@
 .settings-menu {
   position: relative;
   display: inline-block;
-  margin-left: 15px;
+  margin-left: .0rem;
+    margin-right: 3rem;
+
 }
 
 .settings-btn {
@@ -517,24 +504,28 @@
   border: none;
   cursor: pointer;
   padding: 0;
+  font-size: 28px;
 }
 
 .settings-icon {
-  width: 24px;
-  height: 24px;
+  width: 100px;
+  height: 100px;
+  margin-left: 0%;
 }
 
 .settings-dropdown {
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: #fff;
+  background-color: #000000;
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 8px 0;
   min-width: 160px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   z-index: 1000;
+    max-width: calc(100vw - 20px);
+
 }
 
 .settings-dropdown li {
@@ -544,7 +535,7 @@
 .settings-dropdown li a {
   display: block;
   padding: 8px 16px;
-  color: #333;
+  color: #ffffff;
   text-decoration: none;
   transition: background 0.2s;
 }
@@ -552,4 +543,65 @@
 .settings-dropdown li a:hover {
   background-color: #f0f0f0;
 }
+.user-name {
+  font-weight: 500;
+  color: #fff;
+}
+.user-dropdown-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 0px;
+  margin-right: 0px;
+  color: white;
+}
 
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgb(0, 0, 0);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 4px 0;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(253, 253, 253, 0.63);
+  z-index: 100;
+  max-width: calc(100vw - 20px);
+  margin-right: 0.1rem;
+}
+
+.user-dropdown li {
+  padding: 5px 15px;
+}
+
+.user-dropdown li a {
+  text-decoration: none;
+  color: #fffdfd;
+  display: block;
+}
+
+.user-dropdown li a:hover {
+  background-color: #353535;
+}
+.header-right {
+  margin-left: auto; /* lo manda a la derecha */
+  display: flex;
+  align-items: center;
+  gap: .5rem; /* espacio entre avatar, nombre y menús */
+  position: relative;
+    max-width: 100%; /* evita que se desborde */
+
+}
+
+
+
+
+
+.user-dropdown-container,
+.settings-menu {
+  position: relative;
+  flex-shrink: 0;
+}
