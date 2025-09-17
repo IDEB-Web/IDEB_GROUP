@@ -7,7 +7,6 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  // Asegúrate de que esta URL coincida con la de tu backend Laravel
   private apiUrl = 'http://127.0.0.1:8000/api';
 
 

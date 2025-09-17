@@ -6,8 +6,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const authToken = authService.getToken();
 
-  // Solo añade el token a las rutas de admin
-  if (authToken && req.url.includes('/api/admin/')) {
+  if (authToken && req.url.startsWith('http://127.0.0.1:8000/api/')) {
+
     const authReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${authToken}`),
     });

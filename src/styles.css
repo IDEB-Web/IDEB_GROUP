@@ -41,7 +41,7 @@ app-root {
 }
 
 .btn-main:hover {
-  background: #000;
+  background: #3867ff;
 }
 
 /* 🔥 Variante en rojo */
@@ -53,4 +53,38 @@ app-root {
 
 .btn-main.red:hover {
   background: #b71c1c;
+}
+
+.google-login {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.btn-google:hover {
+  background-color: #f7f7f7;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.btn-google {
+  color: #4285f4;
 }
