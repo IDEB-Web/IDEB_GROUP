@@ -47,5 +47,14 @@
   background: #c62828;   /* rojo al pasar el mouse */
   color: #fff;           /* texto blanco */
 }
-
-
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .seati-btn-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+@media (max-width: 576px) {
+  .seati-btn-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}

@@ -1,54 +1,29 @@
+/* ==========================================================================
+   Variables y Estilos Base
+   ========================================================================== */
+:root {
+  --color-primary: #000;
+  --color-primary-dark: #000;
+  --color-primary-light: #2a2a2a; /* Un hover más sutil y oscuro */
+  --color-text-light: #fff;
+  --color-text-dark: #222;
+  --color-text-muted: #fff; /* Blanco intenso */
+  --color-accent: #1976d2;
+  --color-background: #f5f5f5;
+
+  --breakpoint-lg: 992px; /* Tablets en horizontal y escritorios pequeños */
+  --breakpoint-md: 768px; /* Tablets en vertical */
+  --breakpoint-sm: 600px; /* Móviles grandes */
+}
+
 .layout-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
-  background: #f5f5f5;
+  background: var(--color-background);
   overflow-x: hidden;
-}
-
-.sidebar {
-  width: 220px;
-  background: #000000;
-  color: #fff;
-  transition: transform 0.3s, width 0.3s;
-  padding-top: 1rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 1000;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.10);
-}
-.sidebar.collapsed {
-  width: 60px;
-}
-.toggle-btn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  margin-left: 10px;
-  cursor: pointer;
-}
-.sidebar nav ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar nav ul li {
-  margin: 1rem 0;
-}
-.sidebar nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  display: block;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-.sidebar nav ul li a:hover {
-  background: #455a64;
 }
 
 .main-content {
@@ -57,199 +32,279 @@
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  max-width: 100vw;
 }
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: var(--color-background);
+  min-width: 0;
+}
+
+/* ==========================================================================
+   Header Principal
+   ========================================================================== */
 .header {
-  background: #000000;
-  color: #fff;
-  padding: 1rem 2rem;
+  background: #000; /* Forzamos el color negro directamente */
+  color: #fff !important; /* Forzamos el color de texto a blanco intenso */
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   position: relative;
   width: 100%;
-  min-width: 0;
   gap: 1.5rem;
-  height: 60px;
+  height: 65px;
 }
+
 .menu-btn {
-  position: static;
-  margin-right: 1.2rem;
   background: none;
   border: none;
-  color: #fff;
+  color: #fff !important; /* Forzamos el color del icono a blanco intenso */
   font-size: 2rem;
   padding: 0.3rem 0.7rem;
   border-radius: 6px;
   transition: background 0.2s;
+  flex-shrink: 0; /* Evita que se encoja */
 }
-.menu-btn:focus, .menu-btn:hover {
-  background: #222;
-  color: #fff;
+
+.menu-btn:focus,
+.menu-btn:hover {
+  background: var(--color-primary-light);
 }
+
 .logo-container {
   display: flex;
   align-items: center;
-  margin-left: 0.5rem;
-  margin-right: 2rem;
-  min-width: 40px;
   height: 100%;
+  padding: 0.5rem 0;
+  flex-shrink: 0;
 }
+
 .company-logo {
   height: 100%;
-  max-height: 70px;
+  max-height: 55px;
   width: auto;
   display: block;
+  cursor: pointer;
 }
+
 .system-title {
   font-size: 1.5rem;
   font-weight: bold;
-  flex: 1 1 auto;
+  flex-grow: 1;
   text-align: center;
-  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0 1rem;
 }
-/* 📱 Ajustes para tablets */
-@media (max-width: 900px) {
-  .header {
-    flex-wrap: wrap; /* permite que los elementos bajen ordenados */
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
-    height: auto;
-  }
 
-  .logo-container {
-    margin: 0;
-    height: 50px; /* reduce tamaño */
-  }
-
-  .company-logo {
-    max-height: 50px;
-  }
-
-  .system-title {
-    flex: 1 1 100%;
-    text-align: center;
-    font-size: 1.2rem;
-    margin: 0.5rem 0;
-  }
-
-  .user-menu {
-    margin-left: auto; /* Añade esto para mantenerlo a la derecha */
-    margin-right: 0.3rem;
-  }
-
- .profile-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+.header-right {
+  margin-left: auto;
+  margin-right: 2rem; 
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+  flex-shrink: 0;
 }
-}
-
-/* 📱 Extra pequeño (celulares) */
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.7rem;
-    gap: 0.4rem;
-  }
-
-  .system-title {
-    font-size: 1rem;
-    text-align: center;
-  }
-
-  .logo-container {
-    height: 40px;
-  }
-
-  .company-logo {
-    max-height: 40px;
-  }
-
-.user-name {
-  margin-left: 0.8rem;
-  font-weight: 500;
-  color: #fff;
-}}
 
 .user-menu {
   margin-left: auto;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin-right: 3rem;
-  gap: 0px;/* Ajustado para dar espacio al menú de configuración */
-}
-.logout-btn {
-  margin-left: 1rem;
-  background: #7c7676;
-  color: #fff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
+  margin-right: 2rem;
 }
 
-.logout-btn:hover {
-  background: #b71c1c;
+.user-menu,
+.user-dropdown-container,
+.settings-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
+
 .login-btn {
+  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;
 }
+
 .profile-icon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background: #878585;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
+  border: 1px solid var(--color-text-muted);
 }
-.content {
-  flex: 1;
-  padding: 2rem;
-  background: #f5f5f5;
-  min-width: 0;
+
+.user-name {
+  font-weight: 500;
+  color: #fff !important; /* Forzamos el color del nombre a blanco intenso */
+  white-space: nowrap;
 }
-.footer {
-  background: #263238;
-  color: #fff;
-  text-align: center;
-  padding: 0.7rem;
-  position: sticky;
-  bottom: 0;
+
+/* ==========================================================================
+   Menús Desplegables (Dropdowns)
+   ========================================================================== */
+.dropdown-menu,
+.user-dropdown,
+.settings-dropdown {
+  position: absolute;
+  background: var(--color-primary-dark);
+  color: var(--color-text-light);
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 1200;
+}
+
+.dropdown-menu {
+  top: 65px;
+  left: 1rem;
+  min-width: 280px;
+}
+
+.dropdown-menu li a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  display: block;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.dropdown-menu li a:hover {
+  background: var(--color-primary-light);
+}
+
+.user-dropdown,
+.settings-dropdown {
+  top: 120%;
+  right: 0;
+  min-width: 160px;
+}
+
+.user-dropdown li,
+.settings-dropdown li {
+  list-style: none;
+}
+
+.user-dropdown li a,
+.settings-dropdown li a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.user-dropdown li a:hover,
+.settings-dropdown li a:hover {
+  background-color: var(--color-primary-light);
+}
+
+.user-dropdown-btn,
+.settings-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  color: #fff !important; /* Forzamos el color de los iconos a blanco intenso */
+  display: flex;
+  align-items: center;
+}
+
+.settings-btn {
+  font-size: 1.75rem;
+}
+
+/* ==========================================================================
+   Contenido Principal (Botones de Inicio)
+   ========================================================================== */
+.main-buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.top-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
   width: 100%;
+  flex-wrap: wrap; /* Permite que los botones se envuelvan si no caben */
 }
+
+.main-btn {
+  background: var(--color-primary);
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s, transform 0.2s;
+  width: 100%; /* Ancho flexible */
+  max-width: 440px; /* Ancho máximo para pantallas grandes */
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.main-btn:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-5px);
+}
+
+.main-nav-btn-text {
+  line-height: 1.3;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Modal de Login
+   ========================================================================== */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 2000;
 }
-/* --- LOGIN MODAL --- */
+
 .login-modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #fff;
-  color: #222;
+  color: var(--color-text-dark);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   z-index: 2100;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   text-align: center;
 }
@@ -261,13 +316,13 @@
 }
 
 .login-logo {
-  max-width: 180px;
+  max-width: 160px;
   margin-bottom: 1rem;
 }
 
 .login-form h3 {
   margin-bottom: 1.5rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #333;
 }
@@ -276,7 +331,7 @@
   align-self: flex-start;
   font-size: 0.9rem;
   margin: 0.5rem 0 0.2rem;
-  color: #444;
+  color: #555;
 }
 
 .login-form input {
@@ -285,38 +340,28 @@
   margin-bottom: 1rem;
   border: 1px solid #ddd;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   outline: none;
+  box-sizing: border-box;
 }
 
 .login-form input:focus {
-  border-color: #1976d2;
-  box-shadow: 0 0 4px rgba(25, 118, 210, 0.3);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.4);
 }
 
 .password-container {
   position: relative;
   width: 100%;
-}
-
-.password-container input {
-  padding-right: 2.5rem;
-}
-
-.password-container .toggle-password {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #666;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem; /* Mantiene el espaciado consistente */
 }
 
 .btn-login {
   width: 100%;
-  background: #111;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-text-light);
   padding: 0.9rem;
   border: none;
   border-radius: 6px;
@@ -324,21 +369,32 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s;
-  margin: 0.5rem 0 1rem;
+  margin: 1rem 0;
 }
 
-.btn-login:hover {
-  background: #333;
+.btn-login:hover:not(:disabled) {
+  background: var(--color-primary-light);
+}
+
+.btn-login:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .login-links {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #555;
-  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-links p {
+  margin: 0 0 0.5rem;
 }
 
 .login-links a {
-  color: #1976d2;
+  color: var(--color-accent);
   text-decoration: none;
 }
 
@@ -346,262 +402,124 @@
   text-decoration: underline;
 }
 
-.version {
-  font-size: 0.8rem;
-  color: #ede9e9;
-  margin-top: 0.5rem;
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #d32f2f;
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.9rem;
 }
 
-
-.dropdown-menu {
-  position: absolute;
-  top: 60px;
-  left: 2rem;
-  background: #090909;
-  color: #fff;
-  list-style: none;
-  padding: 1.2rem 0;
-  margin: 0;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.22);
-  min-width: 260px;
-  z-index: 1200;
-}
-.dropdown-menu li a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  padding: 1rem 1.6rem;
-  border-radius: 6px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-.dropdown-menu li a:hover {
-  background: #333;
-  color: #fff;
-}
-.main-buttons-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  gap: 2.5rem;
-}
-.top-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 2.5rem;
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  background: #263238;
+  color: var(--color-text-light);
+  text-align: center;
+  padding: 1rem;
   width: 100%;
 }
-.main-btn {
-  background: #111;
-  color: #fff;
-  font-size: 1.35rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 12px;
-  padding: 2rem 2.5rem;
-  cursor: pointer;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  transition: background 0.2s, transform 0.2s;
-  min-width: 440px;
-  max-width: 900px;
-  margin: 0 1rem;
-}
-.main-btn:hover {
-  background: #1976d2;
-  color: #fff;
-  transform: scale(1.04);
-}
-.left-btn {
-  align-self: flex-start;
-}
-.right-btn {
-  align-self: flex-end;
-}
-.center-btn {
-  align-self: center;
-  margin-top: 2.5rem;
-}
-.main-nav-buttons {
-  display: flex;
-  flex-wrap: wrap;    
-  justify-content: center;
-  gap: 1rem;
+
+/* ==========================================================================
+   Media Queries para Diseño Responsivo
+   ========================================================================== */
+
+/* Tablets y escritorios pequeños */
+@media (max-width: 992px) {
+  .system-title {
+    display: none; /* Ocultar título para dar espacio */
+  }
+
+  .header {
+    justify-content: space-between;
+  }
+
+  .header-right {
+    margin-left: 0; /* Resetear margen */
+  }
+
+  .top-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .main-btn {
+    min-width: initial; /* Remover ancho mínimo */
+    width: 100%;
+    max-width: 500px; /* Limitar ancho en tablets */
+  }
+
+  .center-btn {
+    margin-top: 0;
+  }
 }
 
-.main-nav-button {
-  flex: 1 1 260px; 
-  background: #111;
-  color: #fff;
-  text-transform: uppercase;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  width: 260px;
-  height: 65px;
-  padding: 0 2rem;
-  margin: 1rem 0;
-  cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Tablets en vertical y móviles grandes */
+@media (max-width: 768px) {
+  .header {
+    padding: 0.8rem 1rem;
+    gap: 1rem;
+    height: 60px;
+  }
+
+  .logo-container {
+    margin-right: 0;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .main-btn {
+    font-size: 1.1rem;
+    padding: 1.5rem;
+  }
+
+  .dropdown-menu {
+    width: calc(100vw - 2rem);
+    left: 1rem;
+  }
 }
 
-.main-nav-button:hover {
-  background: #000;
-}
-.main-nav-btn-text {
-  display: block;
-  text-align: center;
-  line-height: 1.2;
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
+/* Móviles pequeños */
 @media (max-width: 600px) {
   .header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0.7rem;
+    padding: 0.5rem 1rem;
   }
-  .logo-container {
-    margin: 0 auto 0.5rem auto;
+
+  .user-name {
+    display: none; /* Ocultar nombre de usuario en pantallas muy pequeñas */
   }
-  .system-title {
+
+  .header-right {
+    gap: 0.2rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .main-buttons-container {
+    gap: 1.5rem;
+  }
+
+  .top-buttons {
+    gap: 1.5rem;
+  }
+
+  .main-btn {
+    padding: 1.2rem;
     font-size: 1rem;
-    margin: 0.3rem 0;
-    text-align: center;
   }
-  .user-menu {
-    /* Quita el centrado que causa el desbordamiento */
-    margin-left: auto; /* Empuja el menú a la derecha */
-    margin-right: 1rem; /* Dale un poco de espacio del borde */
-  }
-  .dropdown-menu {
-    left: 0.5rem;
-    min-width: 180px;
+
+  .dropdown-menu li a {
     font-size: 1rem;
+    padding: 0.8rem 1rem;
   }
-}
-.settings-menu {
-  position: relative;
-  display: inline-block;
-  margin-left: .0rem;
-    margin-right: 3rem;
-
-}
-
-.settings-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-size: 28px;
-}
-
-.settings-icon {
-  width: 100px;
-  height: 100px;
-  margin-left: 0%;
-}
-
-.settings-dropdown {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: #000000;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 0;
-  min-width: 160px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
-    max-width: calc(100vw - 20px);
-
-}
-
-.settings-dropdown li {
-  list-style: none;
-}
-
-.settings-dropdown li a {
-  display: block;
-  padding: 8px 16px;
-  color: #ffffff;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-
-.settings-dropdown li a:hover {
-  background-color: #f0f0f0;
-}
-.user-name {
-  font-weight: 500;
-  color: #fff;
-}
-.user-dropdown-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 0px;
-  margin-right: 0px;
-  color: white;
-}
-
-.user-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: rgb(0, 0, 0);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  list-style: none;
-  padding: 4px 0;
-  min-width: 120px;
-  box-shadow: 0 2px 8px rgba(253, 253, 253, 0.63);
-  z-index: 100;
-  max-width: calc(100vw - 20px);
-  margin-right: 0.1rem;
-}
-
-.user-dropdown li {
-  padding: 5px 15px;
-}
-
-.user-dropdown li a {
-  text-decoration: none;
-  color: #fffdfd;
-  display: block;
-}
-
-.user-dropdown li a:hover {
-  background-color: #353535;
-}
-.header-right {
-  margin-left: auto; /* lo manda a la derecha */
-  display: flex;
-  align-items: center;
-  gap: .5rem; /* espacio entre avatar, nombre y menús */
-  position: relative;
-    max-width: 100%; /* evita que se desborde */
-
-}
-
-
-
-
-
-.user-dropdown-container,
-.settings-menu {
-  position: relative;
-  flex-shrink: 0;
 }

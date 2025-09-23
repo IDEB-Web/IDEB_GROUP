@@ -1,14 +1,11 @@
-/* Quita márgenes globales y asegura que el layout use toda la pantalla */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  background: #f5f5f5; /* mismo color que tu layout */
-  overflow-x: hidden;
+  background: #f5f5f5; 
 }
 
-/* Asegura que Angular ocupe todo el espacio */
 app-root {
   display: flex;
   flex-direction: column;
@@ -16,9 +13,44 @@ app-root {
   width: 100%;
 }
 
+/* ==========================================================================
+   CORRECCIÓN GLOBAL PARA BOTONES PRINCIPALES
+   Esta regla se añade aquí porque los estilos del componente no se aplican
+   correctamente por un conflicto desconocido.
+   ========================================================================== */
+.main-btn {
+  background-color: #000 !important;
+  color: #fff !important;
+}
 
+/* ==========================================================================
+   CORRECCIÓN GLOBAL PARA MENÚS DESPLEGABLES
+   Esta regla se añade aquí porque los estilos del componente no se aplican
+   correctamente por un conflicto desconocido.
+   ========================================================================== */
+.dropdown-menu,
+.user-dropdown,
+.settings-dropdown {
+  background-color: #000 !important;
+}
 
-/* Botón principal negro (estilo base para instituto, automated, seati, etc.) */
+/* ==========================================================================
+   CORRECCIÓN GLOBAL PARA BOTÓN DE LOGIN
+   Se añade para forzar el color correcto en el modal de login.
+   ========================================================================== */
+.btn-login {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   CORRECCIÓN GLOBAL PARA ENLACES DEL MODAL DE LOGIN
+   Se añade para forzar el color azul correcto.
+   ========================================================================== */
+.login-links a {
+  color: #1976d2 !important;
+}
+
 .btn-main {
   background: #111;
   color: #fff;
@@ -41,10 +73,9 @@ app-root {
 }
 
 .btn-main:hover {
-  background: #3867ff;
+  background: #4c4d4f;
 }
 
-/* 🔥 Variante en rojo */
 .btn-main.red {
   background: #c62828;
   color: #fff;
@@ -87,4 +118,54 @@ app-root {
 
 .btn-google {
   color: #4285f4;
+}
+.back-button-container {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #f0f0f0; 
+  border-bottom: 1px solid #ccc;
+}
+
+.back-button {
+  background: #060606;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.back-button:hover {
+  background: #1e4ed8;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Estilos globales para tablas de Angular Material */
+.mat-mdc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.mat-mdc-header-cell {
+  background: #000 !important;
+  color: #fff !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.mat-mdc-cell {
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  padding: 12px;
+}
+
+.mat-mdc-row:hover {
+  background: #f2f2f2;
+  cursor: pointer;
 }

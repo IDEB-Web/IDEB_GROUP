@@ -1,0 +1,24 @@
+<div class="modal-backdrop" *ngIf="isOpen" (click)="closeModal()"></div>
+
+<div class="profile-modal" [class.open]="isOpen">
+  <div class="modal-header">
+    <h2>Perfil de {{ user?.name }}</h2>
+    <button class="close-btn" (click)="closeModal()">✖</button>
+  </div>
+  <div class="modal-body">
+    <div class="profile-avatar">
+      <img [src]="user?.photoUrl || 'assets/profile.svg'" alt="Avatar usuario" />
+    </div>
+    <div class="profile-info">
+      <p><strong>Nombre:</strong> {{ user?.name }}</p>
+      <p><strong>Email:</strong> {{ user?.email }}</p>
+      <p><strong>Rol:</strong> {{ user?.role }}</p>
+      <p><strong>Estado:</strong> {{ user?.status }}</p>
+      <p><strong>Creado:</strong> {{ user?.created_at | date:'medium' }}</p>
+      <p><strong>Última actualización:</strong> {{ user?.updated_at | date:'medium' }}</p>
+    </div>
+  </div>
+</div>
+
+
+

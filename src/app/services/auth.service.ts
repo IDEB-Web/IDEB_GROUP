@@ -30,6 +30,20 @@ export class AuthService {
     );
   }
 
+  // Login via Google (id_token enviado desde frontend)
+  googleSignIn(idToken: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/auth/google-signin`, { token: idToken }).pipe(
+      tap(response => {
+        if (response.access_token) {
+          localStorage.setItem('authToken', response.access_token);
+          if (response.user) {
+            localStorage.setItem('user', JSON.stringify(response.user));
+          }
+        }
+      })
+    );
+  }
+
   // Obtener token desde localStorage
   getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -39,6 +53,11 @@ export class AuthService {
   getUser(): User | null {
     const userJson = localStorage.getItem('user');
     return userJson ? JSON.parse(userJson) : null;
+  }
+
+  // Verificar si hay sesión iniciada
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
   // Verificar si el usuario es admin
@@ -84,8 +103,12 @@ export class AuthService {
     );
   }
 
+  // Limpiar sesión local
   private clearLocalData(): void {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
   }
 }
+
+
+

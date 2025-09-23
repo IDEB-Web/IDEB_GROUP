@@ -1,6 +1,49 @@
 <div class="submodule-container">
-    <h2>Gestión de Cursos</h2>
-    <p>Bienvenido al Submódulo de Gestión de Cursos</p>
-    <!-- Aquí va la interfaz de gestión de cursos -->
-  </div>
+  <h2>Gestión de Cursos</h2>
 
+  <div class="filters">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar curso..." />
+    <select [(ngModel)]="filterEstado">
+      <option value="">Todos los estados</option>
+      <option value="Activo">Activo</option>
+      <option value="Inactivo">Inactivo</option>
+      <option value="Completo">Completo</option>
+      <option value="Cancelado">Cancelado</option>
+    </select>
+  </div>
+<div class="table-container">
+
+  <table class="cursos-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Modalidad</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Duración</th>
+        <th>Estado</th>
+        <th>Instructor</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of filteredCursos">
+        <td>{{ curso.nombre }}</td>
+        <td>{{ curso.modalidad }}</td>
+        <td>{{ curso.fechaInicio | date:'dd/MM/yyyy' }}</td>
+        <td>{{ curso.fechaFin | date:'dd/MM/yyyy' }}</td>
+        <td>{{ curso.duracion }}</td>
+        <td>
+          <span class="estado" [ngClass]="curso.estado.toLowerCase()">{{ curso.estado }}</span>
+        </td>
+        <td>{{ curso.instructor }}</td>
+        <td class="acciones">
+          <button (click)="editarCurso(curso)">✏️</button>
+          <button (click)="verDetalles(curso)">🔍</button>
+          <button (click)="cambiarEstado(curso)">⚡</button>
+          <button (click)="eliminarCurso(curso)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

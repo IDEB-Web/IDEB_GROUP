@@ -2,73 +2,58 @@
   <div class="main-content">
     <!-- HEADER -->
     <header class="header" *ngIf="showMainHeader()">
-      <!-- Botón hamburguesa -->
       <button class="menu-btn" (click)="toggleMenu($event)">&#9776;</button>
-
-      <!-- Logo -->
       <div class="logo-container">
-        <img src="assets/LOGO_IDEB.png" alt="LOGO" class="company-logo" (click)="navigateTo('home')"
-          style="cursor:pointer;" />
+        <img [src]="getLogoUrl()" alt="LOGO" class="company-logo" (click)="navigateTo('home')" style="cursor:pointer;" />
       </div>
-
-      <!-- Título dinámico -->
       <span class="system-title">{{ getHeaderTitle() }}</span>
 
-      <!-- Usuario no logueado -->
       <div class="user-menu" *ngIf="!currentUser">
         <button class="login-btn" (click)="openLoginModal()">
           <img src="assets/profile.svg" alt="Usuario" class="profile-icon" />
         </button>
       </div>
 
-      <!-- Usuario logueado -->
-      <!-- Usuario logueado -->
-     <!-- Usuario logueado -->
-<div class="header-right" *ngIf="currentUser">
-  <!-- Avatar -->
-  <img [src]="currentUser.photoUrl || 'assets/profile.svg'" alt="Foto usuario" class="profile-icon" />
+      <div class="header-right" *ngIf="currentUser">
+        <img [src]="currentUser.photoUrl || 'assets/profile.svg'" alt="Foto usuario" class="profile-icon" />
+        <span class="user-name">{{ currentUser.name }}</span>
+        <div class="user-dropdown-container">
+          <button class="user-dropdown-btn" (click)="toggleUserDropdown($event)">&#x25BE;</button>
+          <ul *ngIf="userDropdownOpen" class="user-dropdown" (click)="$event.stopPropagation()">
+            <li><a href="#" (click)="openProfileModal(); closeMenu(); userDropdownOpen = false">Mi Perfil</a></li>
+            <li><a href="#" (click)="logout(); userDropdownOpen = false">Cerrar sesión</a></li>
+          </ul>
+        </div>
+        <div class="settings-menu">
+          <button class="settings-btn" (click)="toggleSettingsMenu($event)">⚙️</button>
+          <ul *ngIf="settingsOpen" class="settings-dropdown" (click)="$event.stopPropagation()">
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Notificaciones</a></li>
+            <li><a href="#">Preferencias</a></li>
+            <li><a href="#">Seguridad</a></li>
+            <li *ngIf="isAdmin()"><a href="#" (click)="triggerLogoUpload($event)">Cambiar Logo</a></li>
+            <li><a href="#">Ayuda</a></li>
+          </ul>
+        </div>
+      </div>
 
-  <!-- Nombre -->
-  <span class="user-name">{{ currentUser.name }}</span>
-
-  <!-- Dropdown usuario -->
-  <div class="user-dropdown-container">
-    <button class="user-dropdown-btn" (click)="toggleUserDropdown($event)">&#x25BE;</button>
-    <ul *ngIf="userDropdownOpen" class="user-dropdown" (click)="$event.stopPropagation()">
-      <li><a routerLink="/perfil" (click)="closeMenu(); userDropdownOpen = false">Mi Perfil</a></li>
-      <li><a href="#" (click)="logout(); userDropdownOpen = false">Cerrar sesión</a></li>
-    </ul>
-  </div>
-
-  <!-- Configuración -->
-  <div class="settings-menu">
-    <button class="settings-btn" (click)="toggleSettingsMenu($event)">
-      ⚙️
-    </button>
-    <ul *ngIf="settingsOpen" class="settings-dropdown" (click)="$event.stopPropagation()">
-      <li><a href="#">Perfil</a></li>
-      <li><a href="#">Notificaciones</a></li>
-      <li><a href="#">Preferencias</a></li>
-      <li><a href="#">Seguridad</a></li>
-      <li><a href="#">Ayuda</a></li>
-    </ul>
-  </div>
-</div>
-
-
-      <!-- Menú desplegable principal -->
       <ul *ngIf="menuOpen" class="dropdown-menu" (click)="$event.stopPropagation()">
         <li><a routerLink="/instituto" (click)="closeMenu()">Instituto I-DEB</a></li>
         <li><a routerLink="/automated" (click)="closeMenu()">I-DEB Automated Machines</a></li>
         <li><a routerLink="/seati" (click)="closeMenu()">SEATI-DEB Servicios Especializados</a></li>
-        <!-- Solo admins -->
         <li *ngIf="isAdmin()"><a routerLink="/admin/usuarios" (click)="closeMenu()">Usuarios Pendientes</a></li>
       </ul>
     </header>
 
-    <!-- CONTENIDO -->
+<input type="file" #logoInput style="display: none;" (change)="onLogoSelected($event)" accept="image/*" />
+
+<div class="back-button-container" *ngIf="showBackButton()">
+  <button class="back-button" (click)="goBack()" title="Volver atrás">
+    &#8592; Volver
+  </button>
+</div>
+
     <section class="content">
-      <!-- Vista inicial (home) -->
       <ng-container *ngIf="isHomeView; else moduleContent">
         <div class="main-buttons-container">
           <div class="top-buttons">
@@ -84,14 +69,13 @@
           </button>
         </div>
       </ng-container>
-
-      <!-- Páginas hijas -->
       <ng-template #moduleContent>
         <router-outlet></router-outlet>
       </ng-template>
     </section>
+   
 
-    <!-- Modal de login -->
+
     <div class="modal-backdrop" *ngIf="loginModalOpen" (click)="closeLoginModal()"></div>
     <div class="login-modal" *ngIf="loginModalOpen" (click)="$event.stopPropagation()">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
@@ -110,7 +94,6 @@
 
         <button type="submit" class="btn-login" [disabled]="loginForm.invalid">Iniciar Sesión</button>
 
-        <!-- Botón de Google -->
         <div class="google-login">
           <button type="button" class="btn-google" (click)="loginWithGoogle()">
             <img src="assets/IDEB-LOGO-GOOGLE.png" alt="Google" class="google-icon" />
@@ -119,7 +102,10 @@
         </div>
 
         <div class="login-links">
-          <p>¿No tienes una cuenta? <a routerLink="/register" (click)="closeLoginModal()">Regístrate aquí</a></p>
+          <p>
+            ¿No tienes una cuenta?
+            <a routerLink="/register" (click)="closeLoginModal()">Regístrate aquí</a>
+          </p>
           <a href="#">Olvidé mi contraseña</a>
         </div>
 
@@ -127,7 +113,11 @@
       </form>
     </div>
 
-    <!-- FOOTER -->
     <app-footer></app-footer>
+    <app-profile-modal
+      [user]="currentUser"
+      [isOpen]="showProfileModal"
+      (closeModalEvent)="closeProfileModal()">
+    </app-profile-modal>
   </div>
 </div>

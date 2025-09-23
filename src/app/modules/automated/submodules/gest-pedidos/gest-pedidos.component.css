@@ -19,3 +19,11 @@
 .text-custom-color-2 {
   color: #c6d12f; /* Verde/amarillo */
 }
+
+/* Estilos responsivos */
+@media (max-width: 576px) {
+  .pedidos-btn-row .btn-main {
+    width: 100%;
+    max-width: 350px;
+  }
+}

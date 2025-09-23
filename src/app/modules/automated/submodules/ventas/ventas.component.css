@@ -22,3 +22,10 @@
   color: #f41f1f;
 }
 
+/* Estilos responsivos */
+@media (max-width: 576px) {
+  .ventas-btn-row .btn-main {
+    width: 100%;
+    max-width: 350px;
+  }
+}

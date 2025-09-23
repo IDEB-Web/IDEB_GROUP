@@ -6,4 +6,5 @@ export interface User {
   status: 'pending' | 'active' | 'rejected';
   created_at: string;
   updated_at: string;
+   photoUrl?: string;
 }
