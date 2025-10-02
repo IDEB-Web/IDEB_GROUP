@@ -1,7 +1,8 @@
 <div class="submodule-container">
   <h2>Aprobación de Usuarios</h2>
 
-  <div *ngIf="message" [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
+  <div *ngIf="message"
+    [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}">
     {{ message }}
   </div>
 

@@ -1,9 +1,9 @@
 .submodule-container {
   padding: 2rem;
-  background-color: #fff;
-  color: #000;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-background-light, var(--mat-sys-surface));
+  color: var(--color-text, var(--mat-sys-on-surface));
 }
 
 .filters {
@@ -12,42 +12,50 @@
   margin-bottom: 1rem;
 }
 
-.filters input, .filters select {
+.filters input,
+.filters select {
   padding: 0.5rem;
   font-size: 0.95rem;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-menu-border, var(--mat-sys-outline));
+  background-color: var(--color-background, var(--mat-sys-surface));
+  color: var(--color-text, var(--mat-sys-on-surface));
   flex-grow: 1;
 }
 
 .table-container {
   width: 100%;
-  overflow-x: auto; 
-  -webkit-overflow-scrolling: touch; 
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: 1rem;
 }
 
 .cursos-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px; 
+  min-width: 800px;
 }
 
-.cursos-table th, .cursos-table td {
+.cursos-table th,
+.cursos-table td {
   padding: 0.8rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-  white-space: nowrap; 
+  border-bottom: 1px solid var(--color-menu-border, var(--mat-sys-outline));
+  white-space: nowrap;
+  background-color: var(--color-background, var(--mat-sys-surface));
+  color: var(--color-text, var(--mat-sys-on-surface));
 }
 
 .cursos-table th {
-  background-color: #363f46;
-  color: white;
   font-weight: bold;
 }
 
+.cursos-table tr:nth-child(even) {
+  background-color: var(--color-background-variant, var(--mat-sys-surface-variant));
+}
+
 .cursos-table tr:hover {
-  background-color: #f5f5f5;
+  background-color: var(--color-hover, var(--mat-sys-primary-container));
 }
 
 .estado {
@@ -59,10 +67,21 @@
   display: inline-block;
 }
 
-.estado.activo { background-color: #28a745; }
-.estado.inactivo { background-color: #6c757d; }
-.estado.completo { background-color: #17a2b8; }
-.estado.cancelado { background-color: #dc3545; }
+.estado.activo {
+  background-color: #28a745;
+}
+
+.estado.inactivo {
+  background-color: #6c757d;
+}
+
+.estado.completo {
+  background-color: #17a2b8;
+}
+
+.estado.cancelado {
+  background-color: #dc3545;
+}
 
 .acciones button {
   margin-right: 0.25rem;
@@ -72,7 +91,6 @@
   font-size: 1rem;
 }
 
-/* Estilos responsivos */
 @media (max-width: 768px) {
   .filters {
     flex-direction: column;

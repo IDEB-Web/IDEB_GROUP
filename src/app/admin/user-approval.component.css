@@ -1,9 +1,9 @@
 .submodule-container {
   padding: 2rem;
-  background-color: #fff;
+  background-color: #8a8989;
   margin: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -13,7 +13,8 @@ h2 {
   padding-bottom: 0.5rem;
 }
 
-.success-message, .error-message {
+.success-message,
+.error-message {
   padding: 1rem;
   margin-bottom: 1.5rem;
   border-radius: 4px;
@@ -47,7 +48,7 @@ h2 {
 }
 
 .approval-table th {
-  background-color: #f8f8f8;
+  background-color: #545454;
   font-weight: bold;
 }
 
@@ -80,11 +81,13 @@ h2 {
 }
 
 .btn-approve {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
+  /* Green */
 }
 
 .btn-reject {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
+  /* Red */
 }
 
 .no-users-message {

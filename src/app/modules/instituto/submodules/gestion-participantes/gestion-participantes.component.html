@@ -1,45 +1,41 @@
 <div class="submodule-container">
   <h2>Gestión de Participantes</h2>
 
-  <mat-form-field appearance="outline" class="filtro">
+  <mat-form-field appearance="outline" class="filtro" style="width: 250px;">
     <mat-label>Buscar participante</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Nombre, correo o curso">
   </mat-form-field>
 
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-      <!-- ID -->
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 participantes-table">
+
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
         <td mat-cell *matCellDef="let element">{{element.id}}</td>
       </ng-container>
 
-      <!-- Nombre -->
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
         <td mat-cell *matCellDef="let element">{{element.nombre}}</td>
       </ng-container>
 
-      <!-- Correo -->
       <ng-container matColumnDef="correo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
         <td mat-cell *matCellDef="let element">{{element.correo}}</td>
       </ng-container>
 
-      <!-- Curso -->
       <ng-container matColumnDef="curso">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Curso</th>
         <td mat-cell *matCellDef="let element">{{element.curso}}</td>
       </ng-container>
 
-      <!-- Estado -->
       <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
         <td mat-cell *matCellDef="let element">{{element.estado}}</td>
       </ng-container>
 
-      <!-- Acciones -->
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef>Acciones</th>
         <td mat-cell *matCellDef="let element">
@@ -48,11 +44,9 @@
         </td>
       </ng-container>
 
-      <!-- Header y Rows -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
 </div>
-

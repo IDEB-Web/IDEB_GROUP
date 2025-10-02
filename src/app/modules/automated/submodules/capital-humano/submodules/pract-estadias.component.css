@@ -18,3 +18,17 @@
   font-size: 1.8rem;
   color: #333;
 }
+
+@media (max-width: 768px) {
+  .submodule-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .pract-estadias-btn-row {
+    gap: 1rem;
+  }
+
+  .pract-estadias-btn-grid {
+    gap: 1rem;
+  }
+}

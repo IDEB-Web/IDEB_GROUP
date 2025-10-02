@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+
 export interface Participante {
   id: number;
   nombre: string;
@@ -16,9 +17,9 @@ export interface Participante {
 }
 
 const PARTICIPANTES_DATA: Participante[] = [
-  {id: 1, nombre: 'Juan Pérez', correo: 'juan@gmail.com', curso: 'Soldadura Industrial', estado: 'Activo'},
-  {id: 2, nombre: 'María López', correo: 'maria@gmail.com', curso: 'Automatización de Máquinas', estado: 'Inactivo'},
-  {id: 3, nombre: 'Carlos Méndez', correo: 'carlos@gmail.com', curso: 'Gestión de Proyectos', estado: 'Activo'},
+  { id: 1, nombre: 'Juan Pérez', correo: 'juan@gmail.com', curso: 'Soldadura Industrial', estado: 'Activo' },
+  { id: 2, nombre: 'María López', correo: 'maria@gmail.com', curso: 'Automatización de Máquinas', estado: 'Inactivo' },
+  { id: 3, nombre: 'Carlos Méndez', correo: 'carlos@gmail.com', curso: 'Gestión de Proyectos', estado: 'Activo' },
 ];
 
 @Component({
@@ -26,6 +27,7 @@ const PARTICIPANTES_DATA: Participante[] = [
   templateUrl: './gestion-participantes.component.html',
   styleUrls: ['./gestion-participantes.component.css'],
   standalone: true,
+
   imports: [
     CommonModule,
     MatTableModule,
@@ -34,6 +36,7 @@ const PARTICIPANTES_DATA: Participante[] = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
+
   ],
 })
 export class GestionParticipantesComponent implements OnInit {
@@ -44,7 +47,7 @@ export class GestionParticipantesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

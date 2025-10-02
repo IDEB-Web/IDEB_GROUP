@@ -6,4 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './generacion-docs.component.html',
   styleUrls: ['./generacion-docs.component.css']
 })
-export class GeneracionDocsComponent {}
+export class GeneracionDocsComponent { }

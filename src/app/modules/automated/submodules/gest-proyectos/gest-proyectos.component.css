@@ -21,7 +21,6 @@
   color: #c6d12f;
 }
 
-/* Estilos responsivos */
 @media (max-width: 576px) {
   .proyectos-btn-row .btn-main {
     width: 100%;

@@ -7,6 +7,7 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  position: relative;
 }
 
 .footer-content {
@@ -15,6 +16,7 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 }
 
 .footer-left {
@@ -28,21 +30,27 @@
 }
 
 .footer-left h3 {
-  color: #1976d2; 
+  color: #1976d2;
   margin-bottom: 0.5rem;
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
   text-align: left;
   width: 100%;
-  
 }
 
 .footer-left p {
   margin: 0.2rem 0;
-  font-size: 0.98rem;
+  font-size: var(--font-size-base);
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.footer-left p:hover {
+  color: #1976d2;
+  cursor: pointer;
 }
 
 .footer-left .material-icons {
-  font-size: 20px;
+  font-size: var(--font-size-base);
   color: #fff;
 }
 
@@ -50,13 +58,12 @@
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
-  justify-content: center;
-  justify-content: flex-start; 
-  margin-left: 10px; 
+  justify-content: flex-start;
+  margin-left: 10px;
 }
 
 .social-icons a {
-  font-size: 28px;
+  font-size: calc(var(--font-size-base) * 1.5);
   color: #fff;
   transition: color 0.3s;
   display: inline-block;
@@ -64,15 +71,6 @@
 
 .social-icons a:hover {
   color: #1976d2;
-}
-
-.footer-version {
-  text-align: right;
-  margin-top: .02rem;
-  font-size: 0.85rem;
-  margin-right: 225px;
-  font-size: 1rem;
-  
 }
 
 .footer-right {
@@ -86,16 +84,30 @@
   margin-left: 20%;
 }
 
-
-
-.footer-left p {
-  margin: 0.2rem 0;
-  font-size: 0.98rem;
-  color: #fff; /* base en blanco */
-  transition: color 0.3s ease;
+.footer-version {
+  text-align: right;
+  margin-top: .02rem;
+  margin-right: 225px;
+  font-size: var(--font-size-base);
 }
 
-.footer-left p:hover {
-  color: #1976d2; /* azul al pasar el mouse */
-  cursor: pointer;
+.footer-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hecho-mexico-img {
+  max-width: 120px;
+  width: 90%;
+  min-width: 80px;
+  height: auto;
+  display: block;
+  margin: auto;
+  margin-bottom: -45px;
 }

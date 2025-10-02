@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { Location } from '@angular/common'; 
+import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,12 +22,11 @@ export class LayoutComponent implements OnInit {
   isHomeView = true;
   loginForm: FormGroup;
   loginError: string | null = null;
-
-  // Referencia al input de archivo para el logo
+  
   @ViewChild('logoInput') logoInput!: ElementRef<HTMLInputElement>;
 
-  currentUser: any = null; 
-  settingsOpen = false;    
+  currentUser: any = null;
+  settingsOpen = false;
 
   constructor(
     public router: Router,
@@ -41,35 +40,76 @@ export class LayoutComponent implements OnInit {
     });
   }
 
-showBackButton(): boolean {
-  return this.router.url !== '/' && this.router.url !== '/home';
-}
+  showBackButton(): boolean {
+    return this.router.url !== '/' && this.router.url !== '/home';
+  }
 
-goBack(): void {
-  this.location.back();
-}
+  goBack(): void {
+    this.location.back();
+  }
+  toggleTheme(event: Event) {
+    event.preventDefault();
+    this.authService.toggleDarkMode();
+  }
+  changeFontSize(size: 'small' | 'medium' | 'large' | 'xlarge', event?: Event) {
+    if(event) event.preventDefault(); 
+    document.body.setAttribute('data-font-size', size);
+    // Actualiza la variable CSS global para que todo lo que use --font-size-base cambie
+    let px = '16px';
+    if (size === 'small') px = '14px';
+    if (size === 'medium') px = '18px';
+    if (size === 'large') px = '22px';
+    if (size === 'xlarge') px = '28px';
+    document.documentElement.style.setProperty('--font-size-base', px);
+    localStorage.setItem('font-size', size);
+  }
+
+
+
 
   ngOnInit() {
+    // Cargar usuario si ya está logueado
     this.currentUser = this.authService.getUser();
 
+    // Detectar cambios de ruta para mostrar si estamos en Home
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.isHomeView = event.urlAfterRedirects === '/home' || event.urlAfterRedirects === '/';
       });
+      const savedSize = localStorage.getItem('font-size');
+      if (savedSize) {
+        document.body.setAttribute('data-font-size', savedSize);
+        let px = '16px';
+        if (savedSize === 'small') px = '14px';
+        if (savedSize === 'medium') px = '18px';
+        if (savedSize === 'large') px = '22px';
+        if (savedSize === 'xlarge') px = '28px';
+        document.documentElement.style.setProperty('--font-size-base', px);
+      }
 
+
+    // Manejar callback de login con Google
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
-    if (token) {
-      this.authService.googleSignIn(token).subscribe({
-        next: (response: any) => {
-          this.currentUser = response.user;
-          this.router.navigate(['/home']);
-        },
-        error: (err: any) => {
-  console.error('Error al iniciar sesión con Google:', err);
-}
+    const path = this.router.url.split('?')[0];
 
+    // SOLO procesar token si estamos en la ruta de Google callback
+    if (token && path === '/auth/callback') {
+      this.authService.googleSignIn(token).subscribe({
+        next: (response) => {
+          if (response && response.access_token) {
+            this.currentUser = this.authService.getUser();
+            this.router.navigate(['/home'], { replaceUrl: true });
+          } else if (response?.status === 'pendiente') {
+            alert(response.message || 'Cuenta pendiente de aprobación.');
+            this.router.navigate(['/home'], { replaceUrl: true });
+          }
+        },
+        error: (err) => {
+          console.error('Error procesando el token de Google:', err.error?.message || err);
+          this.router.navigate(['/auth/error'], { replaceUrl: true });
+        }
       });
     }
   }
@@ -88,39 +128,19 @@ goBack(): void {
 
   showProfileModal = false;
 
-  openProfileModal() {
-    this.showProfileModal = true;
-  }
+  openProfileModal() { this.showProfileModal = true; }
+  closeProfileModal() { this.showProfileModal = false; }
 
-  closeProfileModal() {
-    this.showProfileModal = false;
-  }
-
-  /**
-   * Dispara el click del input de archivo oculto para cambiar el logo.
-   * Solo para administradores.
-   */
   triggerLogoUpload(event: Event) {
-    event.preventDefault(); // Evita que el enlace '#' navegue
+    event.preventDefault();
     this.logoInput.nativeElement.click();
-    this.settingsOpen = false; // Cierra el menú de configuraciones
+    this.settingsOpen = false;
   }
 
-  /**
-   * Se ejecuta cuando el admin selecciona un nuevo archivo de logo.
-   */
   onLogoSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
-
-      // --- Lógica de Subida (Simulada) ---
-      // En una aplicación real, aquí llamarías a un servicio para subir
-      // el archivo al backend y obtener la nueva URL.
-      // Ejemplo: this.configService.uploadLogo(file).subscribe(response => { ... });
-
-      // Para esta demostración, usamos FileReader para obtener una URL local (base64)
-      // y la guardamos en localStorage para persistir el cambio en el navegador.
       const reader = new FileReader();
       reader.onload = (e: any) => {
         localStorage.setItem('customLogoUrl', e.target.result);
@@ -129,7 +149,7 @@ goBack(): void {
       reader.readAsDataURL(file);
     }
   }
-  
+
   login() {
     if (this.loginForm.invalid) {
       this.loginError = 'Por favor, introduce un correo y contraseña válidos.';
@@ -150,22 +170,16 @@ goBack(): void {
     });
   }
 
- 
   userDropdownOpen = false;
-
-  // Toggle del dropdown del usuario
   toggleUserDropdown(event: Event) {
     event.stopPropagation();
     this.userDropdownOpen = !this.userDropdownOpen;
   }
 
-  // Login con Google
   loginWithGoogle() {
-    
     window.location.href = environment.apiUrl + '/auth/google';
   }
 
-  // Logout
   logout() {
     this.authService.logout().subscribe({
       next: () => {
@@ -174,21 +188,18 @@ goBack(): void {
       },
       error: (err) => {
         console.error('Error en el logout del servidor, cerrando sesión localmente:', err);
-        this.authService.logout(); 
+        this.authService.logout();
       }
     });
   }
 
-  // Navegación principal
   navigateTo(view: string) {
     const protectedViews = ['instituto', 'automated', 'seati'];
 
     if (protectedViews.includes(view) && !this.authService.isAuthenticated()) {
-      // Si la vista es protegida y el usuario no está autenticado, abre el modal de login.
       this.loginError = 'Debes iniciar sesión para acceder a esta sección.';
       this.openLoginModal();
     } else {
-      // Si la vista no es protegida o el usuario sí está autenticado, navega.
       switch (view) {
         case 'instituto': this.router.navigate(['/instituto']); break;
         case 'automated': this.router.navigate(['/automated']); break;
@@ -199,7 +210,6 @@ goBack(): void {
     this.closeMenu();
   }
 
-  // Header title dinámico
   getHeaderTitle(): string {
     const url = this.router.url;
     const titleMap: { [key: string]: string } = {
@@ -213,50 +223,68 @@ goBack(): void {
     return 'I-DEB GROUP ERP';
   }
 
-  // Devuelve la URL del logo según la ruta actual
   getLogoUrl(): string {
-    // 1. Revisa si existe un logo personalizado guardado por el admin.
     const customLogo = localStorage.getItem('customLogoUrl');
-    if (customLogo) {
-      return customLogo;
-    }
+    if (customLogo) return customLogo;
 
-    // 2. Si no hay logo personalizado, usa la lógica original basada en la ruta.
     const url = this.router.url;
-
-    if (url.startsWith('/instituto')) {
-      return 'assets/LOGO_IDEB.png';
-    }
-    if (url.startsWith('/automated')) {
-      return 'assets/IDEB2.png';
-    }
-    if (url.startsWith('/seati')) {
-      return 'assets/LOGO_IDEB.png';
-    }
+    if (url.startsWith('/instituto')) return 'assets/LOGO_IDEB.png';
+    if (url.startsWith('/automated')) return 'assets/IDEB2.png';
+    if (url.startsWith('/seati')) return 'assets/LOGO_IDEB.png';
     return 'assets/LOGO_IDEB.png';
   }
-  
-  // Mostrar header siempre
-  showMainHeader(): boolean { return true; }
 
-  // Menú principal
+  showMainHeader(): boolean { return true; }
   closeMenu() { this.menuOpen = false; }
 
-  // Dropdown de configuraciones
   toggleSettingsMenu(event: Event) {
     event.stopPropagation();
     this.settingsOpen = !this.settingsOpen;
   }
 
-  // Cerrar dropdowns al hacer click fuera
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     if (this.settingsOpen) this.settingsOpen = false;
     if (this.menuOpen) this.menuOpen = false;
   }
 
-  // Verificar si el usuario es admin
   isAdmin(): boolean {
     return this.currentUser?.role === 'admin';
   }
+
+
+  getUserRoleLabel(): string {
+    if (!this.currentUser?.role || this.currentUser.role === 'user') {
+      return 'Empleado';
+    }
+    return this.currentUser.role;
+  }
+  // Accesibilidad
+  accessibilityOpen = false;
+  highContrast = false;
+  reduceMotion = false;
+  easyRead = false;
+
+  toggleAccessibilityMenu(event: Event) {
+    event.stopPropagation();
+    this.accessibilityOpen = !this.accessibilityOpen;
+  }
+
+  // Aplicar accesibilidad
+  toggleHighContrast() {
+    this.highContrast = !this.highContrast;
+    document.body.classList.toggle('high-contrast', this.highContrast);
+  }
+
+  toggleReduceMotion() {
+    this.reduceMotion = !this.reduceMotion;
+    document.body.classList.toggle('reduce-motion', this.reduceMotion);
+  }
+
+  toggleEasyRead() {
+    this.easyRead = !this.easyRead;
+    document.body.classList.toggle('easy-read', this.easyRead);
+  }
+
 }
+

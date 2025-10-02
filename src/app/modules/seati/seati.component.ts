@@ -6,6 +6,6 @@ import { LayoutComponent } from '../../shared/layout/layout.component';
   standalone: true,
   templateUrl: './seati.component.html',
   styleUrls: ['./seati.component.css'],
- 
+
 })
-export class SeatiComponent {}
+export class SeatiComponent { }

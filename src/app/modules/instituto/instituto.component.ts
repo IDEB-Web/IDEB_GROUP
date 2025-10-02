@@ -11,6 +11,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./instituto.component.css']
 })
 export class InstitutoComponent {
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 }
 

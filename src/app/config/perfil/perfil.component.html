@@ -1,0 +1,41 @@
+<div class="perfil-container">
+  <h2>Mi Perfil</h2>
+
+  <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()">
+
+    <!-- Foto -->
+    <div class="foto-section">
+      <img *ngIf="fotoPreview" [src]="fotoPreview" alt="Foto de perfil" class="foto-preview" />
+      <input type="file" (change)="onFotoChange($event)" />
+    </div>
+
+    <!-- Nombre -->
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre" />
+
+    <!-- Email (no editable) -->
+    <label>Email:</label>
+    <input type="email" formControlName="email" />
+
+    <!-- Teléfono -->
+    <label>Teléfono:</label>
+    <input type="text" formControlName="telefono" />
+
+    <!-- Idioma -->
+    <label>Idioma:</label>
+    <select formControlName="idioma">
+      <option value="es">Español</option>
+      <option value="en">Inglés</option>
+    </select>
+
+    <!-- Zona horaria -->
+    <label>Zona Horaria:</label>
+    <select formControlName="zonaHoraria">
+      <option value="GMT-6">GMT-6 (México)</option>
+      <option value="GMT-5">GMT-5</option>
+      <option value="GMT-4">GMT-4</option>
+    </select>
+
+    <button type="submit">Guardar Cambios</button>
+  </form>
+</div>

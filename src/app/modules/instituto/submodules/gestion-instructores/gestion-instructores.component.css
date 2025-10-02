@@ -9,7 +9,6 @@
 .submodule-container h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #111;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
@@ -17,19 +16,16 @@
 
 .instructores-btn-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 botones por fila */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   margin: 2rem 0;
 }
 
 .instructores-btn-row {
-  display: contents; /* reutiliza el grid padre, no rompe la estructura */
+  display: contents;
 }
 
-/* Reutiliza los estilos de .instituto-btn */
 .instituto-btn {
-  background: #111;
-  color: #fff;
   text-transform: uppercase;
   font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 15px;
@@ -45,11 +41,7 @@
   justify-content: center;
 }
 
-.instituto-btn:hover {
-  background: #000;
-}
 
-/* Estilos responsivos */
 @media (max-width: 992px) {
   .instructores-btn-grid {
     grid-template-columns: repeat(3, 1fr);

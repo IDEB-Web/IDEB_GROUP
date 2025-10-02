@@ -13,14 +13,13 @@
 }
 
 .text-custom-color-1 {
-  color: #f41f1f; /* Rojo */
+  color: #f41f1f;
 }
 
 .text-custom-color-2 {
-  color: #c6d12f; /* Verde/amarillo */
+  color: #c6d12f;
 }
 
-/* Estilos responsivos */
 @media (max-width: 576px) {
   .finanzas-btn-row .btn-main {
     width: 100%;

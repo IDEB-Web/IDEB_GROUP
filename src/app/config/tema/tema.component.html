@@ -1,0 +1,8 @@
+<div class="tema-container">
+  <h3>Selecciona el Tema</h3>
+  <button (click)="cambiarTema('claro')">Tema Claro</button>
+  <button (click)="cambiarTema('oscuro')">Tema Oscuro</button>
+
+  <h3>Color Principal</h3>
+  <input type="color" [(ngModel)]="colorPrincipal" (change)="cambiarColor(colorPrincipal)" class="color-picker" />
+</div>

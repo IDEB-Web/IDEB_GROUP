@@ -18,11 +18,11 @@
   font-size: 1.8rem;
   color: #333;
 }
+
 .text-custom-color-1 {
   color: #f41f1f;
 }
 
-/* Estilos responsivos */
 @media (max-width: 576px) {
   .recursos-mat-btn-row .btn-main {
     width: 100%;

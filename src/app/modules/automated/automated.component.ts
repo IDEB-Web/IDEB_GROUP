@@ -7,10 +7,10 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './automated.component.html',
   styleUrls: ['./automated.component.css'],
-  imports: [CommonModule, RouterModule] 
+  imports: [CommonModule, RouterModule]
 })
 export class AutomatedComponent {
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 }
 
 

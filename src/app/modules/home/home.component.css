@@ -1,7 +1,6 @@
-/* Navbar */
 .navbar {
   width: 100%;
-  background: #0d0d0d; /* negro elegante */
+  background: #0d0d0d;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -39,7 +38,7 @@
 }
 
 .nav-links a:hover {
-  color: #1976d2; /* azul corporativo IDEB */
+  color: #1976d2;
 }
 
 .user-btn {

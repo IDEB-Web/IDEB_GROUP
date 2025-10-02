@@ -13,7 +13,7 @@
   background: #fff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -33,14 +33,16 @@
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Important */
+  box-sizing: border-box;
+  /* Important */
 }
 
 .btn-main {
   align-self: center;
 }
 
-.error-message, .success-message {
+.error-message,
+.success-message {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 4px;

@@ -1,6 +1,6 @@
-import { 
-  Component, Input, Output, EventEmitter, 
-  OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef 
+import {
+  Component, Input, Output, EventEmitter,
+  OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef
 } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { User } from '../../models/user.model';
@@ -24,10 +24,9 @@ export class ProfileModalComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private googleScriptElement: HTMLScriptElement | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    // aquí no se inicializa el botón todavía porque el ViewChild no existe
   }
 
   ngAfterViewInit(): void {

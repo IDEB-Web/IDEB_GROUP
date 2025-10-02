@@ -1,171 +1,356 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background: #f5f5f5; 
-}
-
-app-root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-}
-
-/* ==========================================================================
-   CORRECCIÓN GLOBAL PARA BOTONES PRINCIPALES
-   Esta regla se añade aquí porque los estilos del componente no se aplican
-   correctamente por un conflicto desconocido.
-   ========================================================================== */
-.main-btn {
-  background-color: #000 !important;
-  color: #fff !important;
-}
-
-/* ==========================================================================
-   CORRECCIÓN GLOBAL PARA MENÚS DESPLEGABLES
-   Esta regla se añade aquí porque los estilos del componente no se aplican
-   correctamente por un conflicto desconocido.
-   ========================================================================== */
-.dropdown-menu,
-.user-dropdown,
-.settings-dropdown {
-  background-color: #000 !important;
-}
-
-/* ==========================================================================
-   CORRECCIÓN GLOBAL PARA BOTÓN DE LOGIN
-   Se añade para forzar el color correcto en el modal de login.
-   ========================================================================== */
-.btn-login {
-  background-color: #000 !important;
-  color: #fff !important;
-}
-
-/* ==========================================================================
-   CORRECCIÓN GLOBAL PARA ENLACES DEL MODAL DE LOGIN
-   Se añade para forzar el color azul correcto.
-   ========================================================================== */
-.login-links a {
-  color: #1976d2 !important;
-}
-
-.btn-main {
-  background: #111;
-  color: #fff;
+.btn-main,
+.instituto-btn,
+.seati-btn {
   text-transform: uppercase;
   font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 15px;
   font-weight: bold;
-  border: none;
   border-radius: 4px;
   width: 240px;
-  height: 98px;
+  height: 108px;
   padding: 0 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   line-height: 1.2;
+  box-sizing: border-box;
 }
 
-.btn-main:hover {
-  background: #4c4d4f;
+/* =========================================================
+   VARIABLES DE COLORES GLOBALES
+========================================================= */
+:root {
+  /* Tema claro */
+  --color-background-light: #f5f5f5;
+  --color-text-light: #000;
+  --color-border-light: #ddd;
+
+  /* Tema oscuro */
+  --color-background-dark: #121212;
+  --color-text-dark: #fff;
+  --color-border-dark: #444;
+
+  /* Botones y menús (gris oscuro por defecto en claro) */
+  --color-btn: #3f4144;
+  --color-btn-text: #fff;
+  --color-menu-bg: #36393c;
+  --color-menu-text: #fff;
+    /* Tipografía global */
+  --font-family-base: 'Segoe UI', Arial, sans-serif;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-medium: 18px;
+  --font-size-large: 22px;
+  --font-size-xlarge: 28px;
 }
 
-.btn-main.red {
-  background: #c62828;
-  color: #fff;
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+}
+
+body {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  margin: 0;
+  padding: 0;
+  background: var(--color-background-light);
+  color: var(--color-text-light);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* =========================================================
+   TEMA CLARO
+========================================================= */
+.app-layout-container {
+  background: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+
+/* Botones en claro */
+.btn-main,
+.instituto-btn,
+.seati-btn,
+.btn-login,
+.btn-google {
+  background: var(--color-btn) !important;
+  color: var(--color-btn-text) !important;
   border: none;
 }
+.back-button {
+ background-color: yellow;
+ width: 70px;
+ height: 30px;
+border-radius: 7px;
+border: none;}
 
-.btn-main.red:hover {
-  background: #b71c1c;
+
+
+.btn-main:hover,
+.instituto-btn:hover,
+.seati-btn:hover,
+.btn-login:hover,
+.btn-google:hover,
+.back-button:hover {
+
+  opacity: 0.9;
 }
 
-.google-login {
-  text-align: center;
-  margin: 15px 0;
+/* Dropdowns en claro */
+.dropdown-menu,
+.user-dropdown,
+.settings-dropdown {
+  background: var(--color-menu-bg) !important;
+  color: var(--color-menu-text) !important;
+  border: none !important;
 }
 
-.btn-google {
+/* Modal de login en claro */
+.app-layout-container .login-modal {
+  background: #5e5d5d !important;
+  color: #fff !important;
+  
+}
+
+/* =========================================================
+   TEMA OSCURO
+========================================================= */
+.app-layout-container.dark-theme {
+  background: var(--color-background-dark);
+  color: var(--color-text-dark);
+}
+
+.app-layout-container.dark-theme .btn-main,
+.app-layout-container.dark-theme .instituto-btn,
+.app-layout-container.dark-theme .seati-btn,
+.app-layout-container.dark-theme .btn-login,
+.app-layout-container.dark-theme .btn-google,
+.app-layout-container.dark-theme .back-button {
+  background: var(--color-btn) !important;
+  color: var(--color-btn-text) !important;
+}
+
+/* Dropdowns en oscuro */
+.app-layout-container.dark-theme .dropdown-menu,
+.app-layout-container.dark-theme .user-dropdown,
+.app-layout-container.dark-theme .settings-dropdown {
+  background: var(--color-menu-bg) !important;
+  color: var(--color-menu-text) !important;
+}
+
+/* Modal de login en oscuro */
+.app-layout-container.dark-theme .login-modal {
+  background: #1e1e1e !important;
+  color: #fff !important;
+}
+
+/* =========================================================
+   Hover de botones principales en tema claro (suavizado)
+========================================================= */
+.app-layout-container:not(.themedark) .main-btn:hover {
+  background-color: var(--color-btn) !important;
+  filter: brightness(1.5);
+  color: var(--color-btn-text) !important;
+  transition: filter 0.2s ease, background-color 0.2s ease;
+}
+body[data-font-size="small"] { font-size: var(--font-size-small); }
+body[data-font-size="medium"] { font-size: var(--font-size-medium); }
+body[data-font-size="large"] { font-size: var(--font-size-large); }
+body[data-font-size="xlarge"] { font-size: var(--font-size-xlarge); }
+
+body[data-font-size="small"] { font-size: 13px; }
+body[data-font-size="medium"] { font-size: 15px; }
+body[data-font-size="large"] { font-size: 18px; }
+body[data-font-size="xlarge"] { font-size: 22px; }
+
+body { transition: font-size 0.2s ease; }
+
+/* Dropdown styling */
+.font-size-dropdown {
+  display: none;
+  position: absolute;
+  background: var(--color-menu-bg);
+  color: var(--color-menu-text);
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  border-radius: 6px;
+}
+
+li:hover > .font-size-dropdown { display: block; }
+
+.font-size-dropdown li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--color-menu-text);
+}
+
+.font-size-dropdown li a:hover {
+  background: var(--color-primary);
+  color: var(--color-btn-text);
+}
+/* Submenú accesibilidad */
+.accessibility-submenu {
+  list-style: none;
+  padding: 0.5rem 0 0.5rem 1rem;
+  margin: 0;
+  background-color: var(--color-menu-bg);
+  border-radius: 6px;
+}
+
+.accessibility-submenu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-menu-text);
+  text-decoration: none;
+}
+
+.accessibility-submenu li a:hover {
+  background-color: var(--color-primary);
+  color: var(--color-btn-text);
+  border-radius: 4px;
+}
+
+/* Opciones de accesibilidad */
+body.high-contrast {
+  filter: contrast(1.5) !important;
+}
+
+body.reduce-motion * {
+  transition: none !important;
+  animation: none !important;
+}
+
+body.easy-read {
+  font-family: 'Arial', sans-serif !important;
+  font-size: 1.2rem !important;
+  line-height: 1.6 !important;
+}
+/* Submenú general */
+.settings-dropdown ul,
+.accessibility-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  background: var(--color-menu-bg);
+  color: var(--color-menu-text);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  min-width: 180px; /* ancho uniforme */
+  position: absolute;
+  z-index: 1200;
+}
+
+.settings-dropdown ul li,
+.accessibility-submenu li {
+  margin: 0;
+  padding: 0;
+}
+
+.settings-dropdown > li.accessibility-btn > button {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px 15px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
+  justify-content: space-between;
   width: 100%;
-  transition: all 0.3s ease;
-}
-
-.btn-google:hover {
-  background-color: #f7f7f7;
-}
-
-.google-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
-.btn-google {
-  color: #4285f4;
-}
-.back-button-container {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #f0f0f0; 
-  border-bottom: 1px solid #ccc;
-}
-
-.back-button {
-  background: #060606;
-  color: #fff;
+  padding: 0.5rem 1rem;
+  background: var(--color-menu-bg); /* igual que menú principal */
+  color: var(--color-menu-text);    /* texto del tema */
   border: none;
   border-radius: 4px;
-  padding: 6px 12px;
-  font-size: 14px;
+  font-size: 0.95rem;
   cursor: pointer;
+  text-align: left;
   transition: background 0.2s;
 }
 
-.back-button:hover {
-  background: #1e4ed8;
+/* Hover del botón */
+.settings-dropdown > li.accessibility-btn > button:hover {
+  background: var(--color-primary);
+  color: var(--color-btn-text);
+}
+.accessibility-submenu {
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  background: var(--color-menu-bg); /* igual que otros submenús */
+  color: var(--color-menu-text);
+  border-radius: 4px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: absolute;
+  z-index: 1000;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.accessibility-submenu li {
+  margin: 0;
+}
 
-/* Estilos globales para tablas de Angular Material */
-.mat-mdc-table {
+.accessibility-submenu li button {
   width: 100%;
-  border-collapse: collapse;
-  background: #fff;
+  background: var(--color-btn) !important; /* color de botón principal */
+  color: var(--color-btn-text) !important;
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-weight: normal;
+  cursor: pointer;
+  transition: filter 0.2s ease, background-color 0.2s ease;
 }
 
-.mat-mdc-header-cell {
-  background: #000 !important;
-  color: #fff !important;
+.accessibility-submenu li button:hover {
+  filter: brightness(1.2);
+}
+
+
+
+/* Contenedor de la tabla */
+.table-container {
+  background: var(--color-background-light);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Tabla */
+.participantes-table {
+  width: 100%;
+  background: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+/* Encabezados */
+.participantes-table th.mat-header-cell {
+  background: var(--color-btn); /* gris oscuro */
+  color: var(--color-btn-text); /* texto blanco */
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 14px;
+  padding: 0.75rem;
 }
 
-.mat-mdc-cell {
-  border-bottom: 1px solid #ddd;
-  font-size: 14px;
-  padding: 12px;
+/* Filas */
+.participantes-table td.mat-cell {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
-.mat-mdc-row:hover {
-  background: #f2f2f2;
-  cursor: pointer;
+/* Hover de fila */
+.participantes-table tr.mat-row:hover {
+  background: rgba(0,0,0,0.05);
 }
+
+/* Acciones */
+.participantes-table td.mat-cell button {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* El buscador que se esconde detrás del tema */
+.filtro {
+  position: relative;
+  z-index: 1000; 
+}
+

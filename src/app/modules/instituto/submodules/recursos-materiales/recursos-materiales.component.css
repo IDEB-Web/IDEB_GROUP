@@ -10,7 +10,6 @@
 .submodule-container h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #111;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
@@ -28,15 +27,12 @@
 }
 
 .instituto-btn {
-  background: #111;
-  color: #fff;
   text-transform: uppercase;
   font-family: 'Segoe UI', 'Arial', sans-serif;
   font-size: 15px;
   font-weight: bold;
   border: none;
   border-radius: 4px;
-  /* width: 240px; */ /* Ancho fijo eliminado para responsividad */
   height: 98px;
   padding: 0 1rem;
   cursor: pointer;
@@ -46,11 +42,7 @@
   justify-content: center;
 }
 
-.instituto-btn:hover {
-  background: #000;
-}
 
-/* Estilos responsivos */
 @media (max-width: 992px) {
   .recursos-btn-grid {
     grid-template-columns: repeat(3, 1fr);

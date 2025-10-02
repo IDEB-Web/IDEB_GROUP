@@ -22,22 +22,22 @@ export class UserApprovalComponent implements OnInit {
   }
 
   loadPendingUsers(): void {
-this.authService.getPendingUsers().subscribe({
-  next: (users: User[]) => {   // 👈 aquí
-    this.pendingUsers = users;
-  },
-  error: (err: any) => {       // 👈 aquí
-    console.error('Error loading pending users', err);
-    this.showMessage('Error al cargar los usuarios pendientes.', 'error');
-  }
-});
+    this.authService.getPendingUsers().subscribe({
+      next: (users: User[]) => {
+        this.pendingUsers = users;
+      },
+      error: (err: any) => {
+        console.error('Error loading pending users', err);
+        this.showMessage('Error al cargar los usuarios pendientes.', 'error');
+      }
+    });
   }
 
   approveUser(id: number): void {
     this.authService.approveUser(id).subscribe({
       next: () => {
         this.showMessage('Usuario aprobado correctamente.', 'success');
-        this.loadPendingUsers(); // Refresh the list
+        this.loadPendingUsers();
       },
       error: (err) => {
         console.error('Error approving user', err);
@@ -50,7 +50,7 @@ this.authService.getPendingUsers().subscribe({
     this.authService.rejectUser(id).subscribe({
       next: () => {
         this.showMessage('Usuario rechazado correctamente.', 'success');
-        this.loadPendingUsers(); // Refresh the list
+        this.loadPendingUsers();
       },
       error: (err) => {
         console.error('Error rejecting user', err);

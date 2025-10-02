@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -9,9 +9,27 @@ import { User } from '../models/user.model';
 export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient) { }
+  private darkModeSubject = new BehaviorSubject<boolean>(false);
+  darkMode$ = this.darkModeSubject.asObservable();
 
-  // Registro de usuario
+  constructor(private http: HttpClient) {
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme) {
+      this.darkModeSubject.next(savedTheme === 'true');
+    }
+  }
+
+  get isDarkMode(): boolean {
+    return this.darkModeSubject.value;
+  }
+
+  toggleDarkMode(): void {
+    const newMode = !this.darkModeSubject.value;
+    this.darkModeSubject.next(newMode);
+    localStorage.setItem('darkMode', newMode.toString());
+  }
+
+
   register(userData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/register`, userData);
   }
@@ -30,7 +48,17 @@ export class AuthService {
     );
   }
 
-  // Login via Google (id_token enviado desde frontend)
+  getProfile(): Observable<any> {
+    const headers = this.createAuthHeaders();
+    return this.http.get<any>(`${this.apiUrl}/user`, { headers }).pipe(
+      tap(response => {
+        if (response) {
+          localStorage.setItem('user', JSON.stringify(response));
+        }
+      })
+    );
+  }
+
   googleSignIn(idToken: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/google-signin`, { token: idToken }).pipe(
       tap(response => {
@@ -98,17 +126,33 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/auth/logout`, {}, { headers }).pipe(
       tap({
         next: () => this.clearLocalData(),
-        error: () => this.clearLocalData() // Limpiar también si hay error
+        error: () => this.clearLocalData()
       })
     );
   }
 
-  // Limpiar sesión local
+  sendResetEmail(email: string) {
+    return this.http.post(`${this.apiUrl}/auth/forgot-password`, { email });
+  }
+
+  resetPassword(email: string, password: string, password_confirmation: string, token: string) {
+    return this.http.post(`${this.apiUrl}/auth/reset-password`, {
+      email,
+      password,
+      password_confirmation,
+      token
+    });
+  }
+
+  updateProfile(data: any): Observable<any> {
+    const headers = this.createAuthHeaders();
+    return this.http.put(`${this.apiUrl}/user`, data, { headers }).pipe(
+      tap(updatedUser => localStorage.setItem('user', JSON.stringify(updatedUser)))
+    );
+  }
+
   private clearLocalData(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
   }
 }
-
-
-

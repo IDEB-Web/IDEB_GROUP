@@ -8,7 +8,7 @@
 
 .seati-btn-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 🔥 ahora son 4 columnas */
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   margin: 2rem 0;
 }
@@ -33,28 +33,30 @@
 }
 
 .seati-btn:hover {
-  background: #000;
+  background: #333;
 }
+
 .seati-btn.white-red {
-  background: #fff;              /* fondo blanco */
-  color: #000;     /* texto rojo */
-  border: 2px solid #c62828;     /* borde rojo */
+  background: #fff;
+  color: #000;
+  border: 2px solid #c62828;
   font-weight: bold;
   transition: all 0.3s ease;
 }
 
 .seati-btn.white-red:hover {
-  background: #c62828;   /* rojo al pasar el mouse */
-  color: #fff;           /* texto blanco */
+  background: #c62828;
+  color: #fff;
 }
-/* Estilos responsivos */
+
 @media (max-width: 768px) {
   .seati-btn-grid {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (max-width: 576px) {
   .seati-btn-grid {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -1,0 +1,17 @@
+.tema-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.tema-container button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.color-picker {
+  margin-top: 15px;
+}

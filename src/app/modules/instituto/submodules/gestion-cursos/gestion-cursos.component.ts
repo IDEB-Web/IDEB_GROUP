@@ -25,14 +25,14 @@ export class GestionCursosComponent {
   filterEstado: string = '';
 
   cursos: Curso[] = [
-    { id:1, nombre:'Curso de Soldadura Industrial', modalidad:'Presencial', fechaInicio: new Date('2025-09-01'), fechaFin: new Date('2025-09-30'), duracion:'40 hrs', estado:'Activo', instructor:'Ing. Pérez' },
-    { id:2, nombre:'Automatización de Máquinas', modalidad:'En línea', fechaInicio: new Date('2025-10-05'), fechaFin: new Date('2025-11-05'), duracion:'60 hrs', estado:'Inactivo', instructor:'Ing. Gómez' },
-    { id:3, nombre:'Mantenimiento Preventivo', modalidad:'Mixta', fechaInicio: new Date('2025-09-15'), fechaFin: new Date('2025-10-15'), duracion:'50 hrs', estado:'Activo', instructor:'Ing. Ramírez' },
-    { id:4, nombre:'Gestión de Calidad', modalidad:'Presencial', fechaInicio: new Date('2025-09-20'), fechaFin: new Date('2025-10-20'), duracion:'35 hrs', estado:'Completo', instructor:'Lic. López' },
+    { id: 1, nombre: 'Curso de Soldadura Industrial', modalidad: 'Presencial', fechaInicio: new Date('2025-09-01'), fechaFin: new Date('2025-09-30'), duracion: '40 hrs', estado: 'Activo', instructor: 'Ing. Pérez' },
+    { id: 2, nombre: 'Automatización de Máquinas', modalidad: 'En línea', fechaInicio: new Date('2025-10-05'), fechaFin: new Date('2025-11-05'), duracion: '60 hrs', estado: 'Inactivo', instructor: 'Ing. Gómez' },
+    { id: 3, nombre: 'Mantenimiento Preventivo', modalidad: 'Mixta', fechaInicio: new Date('2025-09-15'), fechaFin: new Date('2025-10-15'), duracion: '50 hrs', estado: 'Activo', instructor: 'Ing. Ramírez' },
+    { id: 4, nombre: 'Gestión de Calidad', modalidad: 'Presencial', fechaInicio: new Date('2025-09-20'), fechaFin: new Date('2025-10-20'), duracion: '35 hrs', estado: 'Completo', instructor: 'Lic. López' },
   ];
 
   get filteredCursos() {
-    return this.cursos.filter(curso => 
+    return this.cursos.filter(curso =>
       curso.nombre.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
       (this.filterEstado ? curso.estado === this.filterEstado : true)
     );
@@ -48,13 +48,13 @@ export class GestionCursosComponent {
 
   cambiarEstado(curso: Curso) {
     const nuevoEstado = prompt('Nuevo estado (Activo, Inactivo, Completo, Cancelado):', curso.estado);
-    if(nuevoEstado === 'Activo' || nuevoEstado === 'Inactivo' || nuevoEstado === 'Completo' || nuevoEstado === 'Cancelado') {
+    if (nuevoEstado === 'Activo' || nuevoEstado === 'Inactivo' || nuevoEstado === 'Completo' || nuevoEstado === 'Cancelado') {
       curso.estado = nuevoEstado as Curso['estado'];
     }
   }
 
   eliminarCurso(curso: Curso) {
-    if(confirm(`¿Eliminar el curso "${curso.nombre}"?`)) {
+    if (confirm(`¿Eliminar el curso "${curso.nombre}"?`)) {
       this.cursos = this.cursos.filter(c => c.id !== curso.id);
     }
   }

@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  template: '',
+  styles: []
 })
-export class HomeComponent {
-  login() {
-    alert('Iniciar sesión');
-  }
-}
+export class HomeComponent {}

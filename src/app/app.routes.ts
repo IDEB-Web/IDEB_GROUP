@@ -5,10 +5,16 @@ import { AutomatedComponent } from './modules/automated/automated.component';
 import { SeatiComponent } from './modules/seati/seati.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { UserApprovalComponent } from './admin/user-approval.component';
+// Configuración
+import { NotificacionesComponent } from './config/notificaciones/notificaciones.component';
+import { TemaComponent } from './config/tema/tema.component';
+
 
 import { adminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 // Submódulos Instituto
 import { GestionCursosComponent } from './modules/instituto/submodules/gestion-cursos/gestion-cursos.component';
 import { GestionParticipantesComponent } from './modules/instituto/submodules/gestion-participantes/gestion-participantes.component';
@@ -37,9 +43,22 @@ import { ColaboradoresComponent } from './modules/automated/submodules/capital-h
 import { PractEstadiasComponent } from './modules/automated/submodules/capital-humano/submodules/pract-estadias.component';
 import { GestTiemposComponent } from './modules/automated/submodules/capital-humano/submodules/gest-tiempos.component';
 
+// Rutas de Auth Google
+import { CallbackComponent } from './modules/auth/callback/callback.component';
+import { PendingComponent } from './modules/auth/pending/pending.component';
+import { ErrorComponent } from './modules/auth/error/error.component';
+
+//  Perfil
+import { PerfilComponent } from './config/perfil/perfil.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'auth/forgot-password', component: ForgotPasswordComponent },
+  { path: 'auth/reset-password', component: ResetPasswordComponent },
+  { path: 'notificaciones', component: NotificacionesComponent },
+  { path: 'config/tema', component: TemaComponent },
+
 
   // Instituto
   {
@@ -74,10 +93,15 @@ export const routes: Routes = [
       { path: 'ventas', component: VentasComponent },
       { path: 'post-ventas', component: PostVentasComponent },
       { path: 'recursos-materiales', component: RecursosMatComponent },
-      { path: 'capital-humano', component: AutomatedCapitalHumanoComponent },
-      { path: 'capital-humano/colaboradores', component: ColaboradoresComponent },
-      { path: 'capital-humano/pract-estadias', component: PractEstadiasComponent },
-      { path: 'capital-humano/gest-tiempos', component: GestTiemposComponent }
+      {
+        path: 'capital-humano',
+        children: [
+          { path: '', component: AutomatedCapitalHumanoComponent, pathMatch: 'full' },
+          { path: 'colaboradores', component: ColaboradoresComponent },
+          { path: 'pract-estadias', component: PractEstadiasComponent },
+          { path: 'gest-tiempos', component: GestTiemposComponent }
+        ]
+      }
     ]
   },
 
@@ -85,10 +109,21 @@ export const routes: Routes = [
   { path: 'seati', component: SeatiComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
 
+  // ✅ Perfil (protegido con AuthGuard)
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
+
   // Admin
   {
     path: 'admin/usuarios',
     component: UserApprovalComponent,
     canActivate: [AuthGuard, adminGuard]
   },
+
+  // Rutas Google Auth
+  { path: 'auth/callback', component: CallbackComponent },
+  { path: 'auth/pending', component: PendingComponent },
+  { path: 'auth/error', component: ErrorComponent },
+
+  // Ruta 404
+  { path: '**', redirectTo: '/home' }
 ];

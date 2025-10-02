@@ -1,0 +1,16 @@
+<div class="notificaciones-container">
+  <div class="notif-panel">
+    <h3>Notificaciones</h3>
+    <ul>
+      <li *ngFor="let notif of notificaciones" [class.leida]="notif.leida">
+        <strong>{{ notif.titulo }}</strong>
+        <small>{{ notif.fecha | date:'short' }}</small>
+        <p>{{ notif.mensaje }}</p>
+        <button (click)="marcarLeida(notif)">Marcar como leída</button>
+      </li>
+    </ul>
+    <div *ngIf="notificaciones.length === 0" class="empty">
+      No hay notificaciones
+    </div>
+  </div>
+</div>
